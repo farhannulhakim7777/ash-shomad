@@ -1,0 +1,12 @@
+{
+  "name": "masjid-ash-shomad",
+  "version": "1.0.0",
+  "description": "Website Company Profile Masjid Ash-Shomad",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./src/output.css --minify",
+    "dev":   "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masjid Ash-Shomad – Oase Spiritual di Jantung Citra Raya</title>
+  <meta name="description"
+    content="Pusat ibadah, kajian ilmu, dan kegiatan sosial untuk membangun umat yang berdaya dan berakhlak mulia." />
+
+  <!--
+    ✅ CSS OUTPUT dari Tailwind CLI
+    Build command : npm run build
+    Watch command : npm run dev
+
+    Input  : ./src/input.css
+    Output : ./src/output.css
+  -->
+  <link rel="stylesheet" href="./src/output.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body class="min-h-screen">
+
+  <!-- ════════════════════════════════════════════
+       HERO SECTION
+  ═════════════════════════════════════════════ -->
+  <section id="beranda" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+    <div class="absolute inset-0 hero-bg"></div>
+    <div class="absolute inset-0 islamic-overlay opacity-5"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#022c22]/90 via-[#064e3b]/60 to-[#022c22]/95"></div>
+
+    <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#064e3b]/40 blur-[100px] animate-float"></div>
+    <!-- FIX ✅ : inline style="animation-delay:3s" → dipindah ke class .orb-delay di input.css -->
+    <div
+      class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#fbbf24]/10 blur-[120px] animate-float orb-delay">
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+
+      <div class="fade-in-up" id="hero-text">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 glass-card rounded-full px-5 py-2 mb-8">
+          <span class="w-2 h-2 rounded-full bg-[#fbbf24] animate-pulse"></span>
+          <span class="text-sm text-[#fbbf24]/90 font-medium tracking-wide uppercase">Official Account</span>
+        </div>
+
+        <!-- Heading -->
+        <h1
+          class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[1.05] tracking-tight mb-6 text-fg">
+          Masjid&nbsp;
+          <span class="bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text text-transparent">Ash-Shomad</span>
+        </h1>
+
+        <p class="text-lg sm:text-xl md:text-2xl text-fg-70 font-light max-w-2xl mx-auto mb-4 leading-relaxed">
+          Oase Spiritual di Jantung Citra Raya
+        </p>
+        <p class="text-sm md:text-base text-fg-50 max-w-xl mx-auto mb-10 leading-relaxed">
+          Pusat ibadah, kajian ilmu, dan kegiatan sosial untuk membangun umat yang berdaya dan berakhlak mulia.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer"
+            class="group flex items-center gap-3 bg-[#fbbf24] text-[#022c22] font-semibold px-8 py-4 rounded-xl hover:scale-105 transition-all duration-300 glow-gold">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Layanan Umat
+          </a>
+          <a href="#kegiatan"
+            class="group flex items-center gap-3 glass-card text-fg font-semibold px-8 py-4 rounded-xl hover:scale-105 hover:bg-white/10 transition-all duration-300">
+            Jelajahi Kegiatan
+            <svg class="w-4 h-4 group-hover:translate-y-1 transition-transform" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Prayer Times Widget -->
+      <div class="fade-in-up delay-500" id="prayer-widget">
+        <div id="prayer-card"
+          class="glass-card-strong rounded-2xl p-5 sm:p-6 max-w-3xl mx-auto transition-all duration-500 glow-indigo">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#fbbf24]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span class="text-sm font-medium text-fg-70">Waktu Shalat Hari Ini</span>
+            </div>
+            <span id="live-clock" class="text-sm text-[#fbbf24] font-mono">00:00:00</span>
+          </div>
+          <div class="grid grid-cols-5 gap-2 sm:gap-3" id="prayer-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+      <span class="text-xs text-fg-40 tracking-widest uppercase">Scroll</span>
+      <svg class="w-4 h-4 text-fg-40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       ACTIVITIES SECTION
+  ═════════════════════════════════════════════ -->
+  <section id="kegiatan" class="relative py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="mb-16 text-center">
+        <span class="inline-block text-[#fbbf24] text-sm font-semibold tracking-widest uppercase mb-4">Ekosistem
+          Kegiatan</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-fg mb-4">Pusat Aktivitas Umat</h2>
+        <p class="text-fg-50 max-w-xl mx-auto leading-relaxed">Beragam kegiatan untuk membangun spiritualitas, ilmu, dan
+          kebersamaan jamaah.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <!-- Kajian Rutin (span 2) -->
+        <div
+          class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden md:col-span-2">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-[#064e3b] to-[#0d3b3b] opacity-0 group-hover:opacity-30 transition-opacity duration-500">
+          </div>
+          <div class="relative z-10">
+            <div class="flex items-start justify-between mb-4">
+              <div
+                class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors duration-300">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+              </div>
+              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Setiap Ahad, Ba'da
+                Subuh</span>
+            </div>
+            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">Kajian
+              Rutin</h3>
+            <p class="text-sm text-fg-50 leading-relaxed">Kajian ilmu agama setiap pekan bersama ustadz terpercaya.
+              Memperdalam pemahaman Al-Quran dan Sunnah.</p>
+          </div>
+        </div>
+
+        <!-- TPA Al-Quran -->
+        <div
+          class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-[#0d3b3b] to-[#064e3b] opacity-0 group-hover:opacity-30 transition-opacity duration-500">
+          </div>
+          <div class="relative z-10">
+            <div class="flex items-start justify-between mb-4">
+              <div
+                class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors duration-300">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+              </div>
+              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Senin – Jumat, 16:00</span>
+            </div>
+            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">TPA
+              Al-Quran</h3>
+            <p class="text-sm text-fg-50 leading-relaxed">Pendidikan Al-Quran untuk anak-anak dengan metode modern dan
+              menyenangkan.</p>
+          </div>
+        </div>
+
+        <!-- Majelis Taklim -->
+        <div
+          class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-[#064e3b]/80 to-[#0d3b3b]/80 opacity-0 group-hover:opacity-30 transition-opacity duration-500">
+          </div>
+          <div class="relative z-10">
+            <div class="flex items-start justify-between mb-4">
+              <div
+                class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors duration-300">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Setiap Rabu, 09:00</span>
+            </div>
+            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">Majelis
+              Taklim</h3>
+            <p class="text-sm text-fg-50 leading-relaxed">Forum diskusi dan sharing ilmu untuk ibu-ibu jamaah.</p>
+          </div>
+        </div>
+
+        <!-- Khutbah & Ceramah -->
+        <div
+          class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-[#0d3b3b] to-[#064e3b] opacity-0 group-hover:opacity-30 transition-opacity duration-500">
+          </div>
+          <div class="relative z-10">
+            <div class="flex items-start justify-between mb-4">
+              <div
+                class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors duration-300">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12" />
+                  <circle cx="17" cy="7" r="5" />
+                </svg>
+              </div>
+              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Setiap Jumat, 12:00</span>
+            </div>
+            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">Khutbah
+              & Ceramah</h3>
+            <p class="text-sm text-fg-50 leading-relaxed">Ceramah inspiratif dan khutbah Jumat yang mencerahkan hati dan
+              pikiran jamaah.</p>
+          </div>
+        </div>
+
+        <!-- Kegiatan Sosial -->
+        <div
+          class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-[#064e3b] to-[#0d3b3b] opacity-0 group-hover:opacity-30 transition-opacity duration-500">
+          </div>
+          <div class="relative z-10">
+            <div class="flex items-start justify-between mb-4">
+              <div
+                class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors duration-300">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+              </div>
+              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Setiap Bulan</span>
+            </div>
+            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">
+              Kegiatan Sosial</h3>
+            <p class="text-sm text-fg-50 leading-relaxed">Bakti sosial, santunan yatim, dan program pemberdayaan
+              masyarakat sekitar.</p>
+          </div>
+        </div>
+
+        <!-- Event Islami -->
+        <div
+          class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-[#0d3b3b]/80 to-[#064e3b]/80 opacity-0 group-hover:opacity-30 transition-opacity duration-500">
+          </div>
+          <div class="relative z-10">
+            <div class="flex items-start justify-between mb-4">
+              <div
+                class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors duration-300">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </div>
+              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Kalender Hijriah</span>
+            </div>
+            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">Event
+              Islami</h3>
+            <p class="text-sm text-fg-50 leading-relaxed">Peringatan hari besar Islam, festival anak sholeh, dan
+              kegiatan Ramadhan.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       DONATION SECTION
+  ═════════════════════════════════════════════ -->
+  <section id="donasi" class="relative py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="relative overflow-hidden rounded-3xl glow-gold">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#064e3b] via-[#0d3b3b] to-[#022c22]"></div>
+        <div class="absolute inset-0 opacity-10 islamic-overlay"></div>
+
+        <div class="relative z-10 p-8 md:p-12 lg:p-16">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+            <div>
+              <div
+                class="inline-flex items-center gap-2 bg-[#fbbf24]/10 border border-[#fbbf24]/20 rounded-full px-4 py-1.5 mb-6">
+                <svg class="w-4 h-4 text-[#fbbf24]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                <span class="text-sm text-[#fbbf24] font-medium">Mitra Strategis @bahteradhuafa</span>
+              </div>
+
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-fg mb-4 leading-tight">Bahtera Dhuafa</h2>
+              <p class="text-lg text-fg-50 mb-6 leading-relaxed">Lembaga Zakat yang menjadi mitra strategis Masjid
+                Ash-Shomad dalam menyalurkan zakat, infaq, dan sedekah untuk memberdayakan umat.</p>
+
+              <!-- Progress bar -->
+              <div class="mb-8">
+                <div class="flex justify-between text-sm mb-2">
+                  <span class="text-fg-50">Target Tahun Ini</span>
+                  <span class="text-[#fbbf24] font-bold">68%</span>
+                </div>
+                <div class="w-full h-3 rounded-full bg-white/10 overflow-hidden">
+                  <div id="progress-fill"
+                    class="h-full rounded-full bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] relative overflow-hidden">
+                    <div class="absolute inset-0 shimmer-bar"></div>
+                  </div>
+                </div>
+                <div class="flex justify-between text-xs mt-2">
+                  <span class="text-fg-40">Rp 850 Juta terkumpul</span>
+                  <span class="text-fg-40">Target: Rp 1.25 Miliar</span>
+                </div>
+              </div>
+
+              <button id="open-modal"
+                class="group flex items-center gap-3 bg-[#fbbf24] text-[#022c22] font-bold px-8 py-4 rounded-xl hover:scale-105 transition-all duration-300 animate-pulse hover:animate-none">
+                <svg class="w-5 h-5 group-hover:scale-110 transition-transform" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                Infaq Digital Sekarang
+              </button>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex flex-col gap-4">
+              <div class="glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300">
+                <div class="flex items-center gap-4">
+                  <div class="p-3 rounded-xl bg-[#fbbf24]/10 text-[#fbbf24]">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-2xl md:text-3xl font-bold text-fg">1,250+</p>
+                    <p class="text-sm text-fg-50">Mustahik Terbantu</p>
+                  </div>
+                </div>
+              </div>
+              <div class="glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300">
+                <div class="flex items-center gap-4">
+                  <div class="p-3 rounded-xl bg-[#fbbf24]/10 text-[#fbbf24]">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                      <polyline points="17 6 23 6 23 12" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-2xl md:text-3xl font-bold text-fg">Rp 850 Jt</p>
+                    <p class="text-sm text-fg-50">Dana Tersalurkan</p>
+                  </div>
+                </div>
+              </div>
+              <div class="glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300">
+                <div class="flex items-center gap-4">
+                  <div class="p-3 rounded-xl bg-[#fbbf24]/10 text-[#fbbf24]">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="12" />
+                      <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-2xl md:text-3xl font-bold text-fg">12</p>
+                    <p class="text-sm text-fg-50">Program Aktif</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       ABOUT / LOCATION SECTION
+  ═════════════════════════════════════════════ -->
+  <section id="tentang" class="relative py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+        <div>
+          <span class="inline-block text-[#fbbf24] text-sm font-semibold tracking-widest uppercase mb-4">Tentang
+            Kami</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-fg mb-6 leading-tight">
+            Rumah Ibadah di&nbsp;
+            <span class="bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text text-transparent">Jantung Citra
+              Raya</span>
+          </h2>
+          <p class="text-fg-50 leading-relaxed mb-8">
+            Masjid Ash-Shomad berdiri sebagai pusat peribadatan dan kegiatan sosial di kawasan Citra Raya, Tangerang.
+            Dengan komitmen untuk membangun umat yang berdaya, kami menghadirkan berbagai program kajian,
+            pendidikan Al-Quran, dan kegiatan sosial yang berkesinambungan.
+          </p>
+
+          <div class="flex flex-col gap-4">
+            <div
+              class="glass-card rounded-xl p-5 flex items-start gap-4 hover:scale-[1.02] transition-all duration-300">
+              <div class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24]">
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-fg mb-1">Alamat</p>
+                <p class="text-sm text-fg-50 leading-relaxed">Jl. Citra Raya Boulevard Timur, Ciakar, Panongan, Kab.
+                  Tangerang</p>
+              </div>
+            </div>
+
+            <div
+              class="glass-card rounded-xl p-5 flex items-start gap-4 hover:scale-[1.02] transition-all duration-300">
+              <div class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24]">
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.36 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8 7.91a16 16 0 0 0 6 6l.36-.72a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16.92z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-fg mb-1">Kontak</p>
+                <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer"
+                  class="text-sm text-[#fbbf24] hover:underline">WhatsApp: 081218612022</a>
+              </div>
+            </div>
+
+            <a href="https://maps.google.com/?q=Masjid+Ash-Shomad+Citra+Raya+Tangerang" target="_blank"
+              rel="noopener noreferrer"
+              class="glass-card rounded-xl p-5 flex items-center gap-4 hover:scale-[1.02] transition-all duration-300 group">
+              <div class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors">
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-fg group-hover:text-[#fbbf24] transition-colors">Petunjuk Arah</p>
+                <p class="text-sm text-fg-50">Buka di Google Maps</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="relative">
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <!--
+              FIX ✅ : inline style="border:0; filter:..." → dipindah ke class .map-iframe di input.css
+              FIX ✅ : referrerpolicy="no-referrer-when-downgrade" → "no-referrer" (kompatibel Firefox & Safari)
+            -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2!2d106.5!3d-6.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTgnMDAuMCJTIDEwNsKwMzAnMDAuMCJF!5e0!3m2!1sid!2sid!4v1"
+              width="100%" height="400" allowfullscreen loading="lazy" referrerpolicy="no-referrer"
+              title="Lokasi Masjid Ash-Shomad" class="map-iframe rounded-2xl">
+            </iframe>
+          </div>
+          <div class="absolute bottom-4 left-4 right-4 glass-card-strong rounded-xl p-4">
+            <p class="text-sm font-semibold text-fg flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#fbbf24] animate-pulse"></span>
+              Masjid Ash-Shomad
+            </p>
+            <p class="text-xs text-fg-40 mt-1">Citra Raya, Tangerang</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       FOOTER
+  ═════════════════════════════════════════════ -->
+  <footer class="relative py-12 px-6 border-t border-white/[0.06]">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <h3 class="text-lg font-bold text-fg mb-2">Masjid Ash-Shomad</h3>
+          <p class="text-sm text-fg-40 leading-relaxed">Oase Spiritual di Jantung Citra Raya. Pusat ibadah, kajian, dan
+            kegiatan sosial.</p>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-fg-50 uppercase tracking-wider mb-3">Tautan</h4>
+          <ul class="flex flex-col gap-2">
+            <li><a href="#beranda" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Beranda</a></li>
+            <li><a href="#kegiatan" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Kegiatan</a></li>
+            <li><a href="#donasi" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Donasi</a></li>
+            <li><a href="#tentang" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Tentang</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-fg-50 uppercase tracking-wider mb-3">Kontak</h4>
+          <p class="text-sm text-fg-40 mb-1">Jl. Citra Raya Boulevard Timur</p>
+          <p class="text-sm text-fg-40 mb-3">Ciakar, Panongan, Kab. Tangerang</p>
+          <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer"
+            class="text-sm text-[#fbbf24] hover:underline">WA: 081218612022</a>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-fg-30" id="copyright"></p>
+        <p class="text-xs text-fg-30 flex items-center gap-1">
+          Dibuat dengan
+          <svg class="w-3 h-3 text-[#fbbf24] inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="currentColor" aria-hidden="true">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          untuk umat
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ════════════════════════════════════════════
+       FLOATING DOCK
+  ═════════════════════════════════════════════ -->
+  <nav id="floating-dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 dock-hidden" aria-label="Navigasi utama">
+    <div class="glass-card-strong rounded-2xl px-2 py-2 flex items-center gap-1">
+      <a href="#beranda" data-section="beranda"
+        class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
+        aria-label="Beranda">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        <span class="nav-label text-xs font-medium hidden sm:inline">Beranda</span>
+      </a>
+      <a href="#kegiatan" data-section="kegiatan"
+        class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
+        aria-label="Kegiatan">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+        </svg>
+        <span class="nav-label text-xs font-medium hidden sm:inline">Kegiatan</span>
+      </a>
+      <a href="#donasi" data-section="donasi"
+        class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
+        aria-label="Donasi">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+        <span class="nav-label text-xs font-medium hidden sm:inline">Donasi</span>
+      </a>
+      <a href="#tentang" data-section="tentang"
+        class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
+        aria-label="Tentang">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+        <span class="nav-label text-xs font-medium hidden sm:inline">Tentang</span>
+      </a>
+      <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer"
+        class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
+        aria-label="Kontak via WhatsApp">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+        <span class="nav-label text-xs font-medium hidden sm:inline">Kontak</span>
+      </a>
+    </div>
+  </nav>
+
+
+  <!-- ════════════════════════════════════════════
+       DONATION MODAL
+  ═════════════════════════════════════════════ -->
+  <div id="donation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay" role="dialog"
+    aria-modal="true" aria-labelledby="modal-title">
+    <div class="absolute inset-0 bg-[#022c22]/80 backdrop-blur-sm" id="modal-backdrop"></div>
+    <div class="modal-box relative glass-card-strong rounded-3xl p-8 max-w-md w-full">
+      <!-- FIX ✅ : tambah aria-label agar button punya discernible text -->
+      <button id="close-modal" aria-label="Tutup modal donasi"
+        class="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-fg-50">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 rounded-2xl bg-[#fbbf24]/10 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-7 h-7 text-[#fbbf24]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+        </div>
+        <h3 id="modal-title" class="text-2xl font-bold text-fg mb-2">Infaq Digital</h3>
+        <p class="text-sm text-fg-50">Pilih rekening tujuan donasi Anda</p>
+      </div>
+      <div class="flex flex-col gap-3" id="account-list"></div>
+      <p class="text-xs text-center text-fg-30 mt-6">Konfirmasi transfer melalui WhatsApp 081218612022</p>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════
+       JAVASCRIPT
+  ═════════════════════════════════════════════ -->
+  <script>
+    (() => {
+      /* ── Prayer Times ── */
+      const PRAYERS = [
+        { name: 'Subuh', time: '04:32', icon: `<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>` },
+        { name: 'Dzuhur', time: '11:54', icon: `<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>` },
+        { name: 'Ashar', time: '15:12', icon: `<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6z"/></svg>` },
+        { name: 'Maghrib', time: '17:58', icon: `<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="9" x2="12" y2="2"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="16 5 12 9 8 5"/></svg>` },
+        { name: 'Isya', time: '19:10', icon: `<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>` },
+      ];
+
+      const GLOW = ['glow-indigo', 'glow-amber', 'glow-orange', 'glow-red', 'glow-indigo'];
+
+      function nextIdx(h, m) {
+        const now = h * 60 + m;
+        for (let i = 0; i < PRAYERS.length; i++) {
+          const [ph, pm] = PRAYERS[i].time.split(':').map(Number);
+          if (ph * 60 + pm > now) return i;
+        }
+        return 0;
+      }
+
+      let lastIdx = -1;
+      function tick() {
+        const now = new Date();
+        const el = document.getElementById('live-clock');
+        if (el) el.textContent = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const idx = nextIdx(now.getHours(), now.getMinutes());
+        if (idx !== lastIdx) {
+          lastIdx = idx;
+          const grid = document.getElementById('prayer-grid');
+          if (grid) grid.innerHTML = PRAYERS.map((p, i) => `
+            <div class="relative flex flex-col items-center gap-1.5 p-2.5 sm:p-3 rounded-xl transition-all duration-300
+              ${i === idx ? 'bg-[#fbbf24]/15 ring-1 ring-[#fbbf24]/40' : 'bg-white/[0.04] hover:bg-white/[0.08]'}">
+              ${i === idx ? `<span class="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[9px] bg-[#fbbf24] text-[#022c22] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Next</span>` : ''}
+              <span class="${i === idx ? 'text-[#fbbf24]' : 'text-fg-50'}">${p.icon}</span>
+              <span class="text-xs font-medium ${i === idx ? 'text-[#fbbf24]' : 'text-fg-50'}">${p.name}</span>
+              <span class="text-sm font-bold font-mono ${i === idx ? 'text-[#fbbf24]' : 'text-fg'}">${p.time}</span>
+            </div>`).join('');
+          const card = document.getElementById('prayer-card');
+          if (card) { card.classList.remove(...GLOW); card.classList.add(GLOW[idx]); }
+        }
+      }
+      tick(); setInterval(tick, 1000);
+
+      /* ── On Load ── */
+      window.addEventListener('DOMContentLoaded', () => {
+        requestAnimationFrame(() => {
+          document.getElementById('hero-text')?.classList.add('visible');
+          setTimeout(() => document.getElementById('prayer-widget')?.classList.add('visible'), 500);
+        });
+        document.getElementById('copyright').textContent = `© ${new Date().getFullYear()} Masjid Ash-Shomad. All rights reserved.`;
+        setTimeout(() => {
+          const d = document.getElementById('floating-dock');
+          d?.classList.remove('dock-hidden');
+          d?.classList.add('dock-visible');
+        }, 1000);
+        setTimeout(() => { document.getElementById('progress-fill').style.width = '68%'; }, 600);
+      });
+
+      /* ── Active scroll highlight ── */
+      function updateActive() {
+        let cur = 'beranda';
+        ['beranda', 'kegiatan', 'donasi', 'tentang'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            const r = el.getBoundingClientRect();
+            if (r.top <= 200 && r.bottom >= 200) cur = id;
+          }
+        });
+        document.querySelectorAll('.nav-item[data-section]').forEach(a => {
+          const active = a.dataset.section === cur;
+          a.classList.toggle('active', active);
+          a.classList.toggle('bg-[#fbbf24]/15', active);
+          a.classList.toggle('text-[#fbbf24]', active);
+          a.classList.toggle('text-fg-50', !active);
+        });
+      }
+      window.addEventListener('scroll', updateActive, { passive: true });
+      updateActive();
+
+      /* ── Donation Modal ── */
+      const ACCOUNTS = [
+        { bank: 'BSI', number: '7182 9012 34', name: 'Masjid Ash-Shomad' },
+        { bank: 'BCA', number: '5320 1847 62', name: 'Yayasan Ash-Shomad' },
+        { bank: 'Mandiri', number: '1570 0065 4321', name: 'Masjid Ash-Shomad' },
+      ];
+      const modal = document.getElementById('donation-modal');
+
+      document.getElementById('account-list').innerHTML = ACCOUNTS.map((a) => `
+        <div class="flex items-center justify-between p-4 rounded-xl bg-white/[0.05] border border-white/[0.08] hover:border-[#fbbf24]/30 transition-all">
+          <div>
+            <p class="text-sm font-bold text-[#fbbf24]">${a.bank}</p>
+            <p class="text-lg font-mono text-fg">${a.number}</p>
+            <p class="text-xs text-fg-40">${a.name}</p>
+          </div>
+          <button onclick="copyAcc('${a.number.replace(/\s/g, '')}', this)"
+            aria-label="Salin nomor rekening ${a.bank}"
+            class="p-2.5 rounded-lg bg-white/10 hover:bg-[#fbbf24]/20 transition-colors text-fg-50 hover:text-[#fbbf24]">
+            <svg class="w-4 h-4 copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+        </div>`).join('');
+
+      document.getElementById('open-modal').addEventListener('click', () => modal.classList.add('open'));
+      document.getElementById('close-modal').addEventListener('click', () => modal.classList.remove('open'));
+      document.getElementById('modal-backdrop').addEventListener('click', () => modal.classList.remove('open'));
+
+      /* Tutup modal dengan tombol Escape */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') modal.classList.remove('open');
+      });
+
+      window.copyAcc = (num, btn) => {
+        navigator.clipboard.writeText(num).then(() => {
+          btn.querySelector('.copy-icon').innerHTML = `<polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+          btn.classList.add('text-green-400');
+          setTimeout(() => {
+            btn.querySelector('.copy-icon').innerHTML = `<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>`;
+            btn.classList.remove('text-green-400');
+          }, 2000);
+        });
+      };
+    })();
+  </script>
+
+</body>
+
+</html>
