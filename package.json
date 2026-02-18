@@ -2,10 +2,11 @@
   "name": "masjid-ash-shomad",
   "version": "1.0.0",
   "description": "Website Company Profile Masjid Ash-Shomad",
-  "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
-    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
-  },
+ "scripts": {
+  "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+  "dev": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+}
+,
   "devDependencies": {
     "tailwindcss": "^3.4.0"
   }
