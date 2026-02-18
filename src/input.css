@@ -173,3 +173,7 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+.hero-overlay {
+    /* 0.5 adalah tingkat transparansi (0.0 sampai 1.0) */
+    background-color: rgba(2, 44, 34, 0.5); 
+}
