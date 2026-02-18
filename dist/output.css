@@ -641,11 +641,6 @@ body {
 
 /* Hero background */
 
-.hero-bg {
-  background: linear-gradient(135deg,
-      #022c22 0%, #064e3b 40%, #0d3b3b 70%, #022c22 100%);
-}
-
 /* Islamic geometric SVG overlay */
 
 .islamic-overlay {
@@ -1204,6 +1199,12 @@ body {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
+.from-\[\#022c22\]\/70 {
+  --tw-gradient-from: rgb(2 44 34 / 0.7) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(2 44 34 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .from-\[\#022c22\]\/90 {
   --tw-gradient-from: rgb(2 44 34 / 0.9) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(2 44 34 / 0) var(--tw-gradient-to-position);
@@ -1240,6 +1241,11 @@ body {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.via-\[\#064e3b\]\/40 {
+  --tw-gradient-to: rgb(6 78 59 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(6 78 59 / 0.4) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
 .via-\[\#064e3b\]\/60 {
   --tw-gradient-to: rgb(6 78 59 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), rgb(6 78 59 / 0.6) var(--tw-gradient-via-position), var(--tw-gradient-to);
@@ -1252,6 +1258,10 @@ body {
 
 .to-\[\#022c22\] {
   --tw-gradient-to: #022c22 var(--tw-gradient-to-position);
+}
+
+.to-\[\#022c22\]\/80 {
+  --tw-gradient-to: rgb(2 44 34 / 0.8) var(--tw-gradient-to-position);
 }
 
 .to-\[\#022c22\]\/95 {
@@ -1663,6 +1673,11 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.hero-overlay {
+  /* 0.5 adalah tingkat transparansi (0.0 sampai 1.0) */
+  background-color: rgba(2, 44, 34, 0.5);
 }
 
 .hover\:text-fg:hover    {
