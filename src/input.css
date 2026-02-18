@@ -164,3 +164,12 @@
   .animate-shimmer    { animation: shimmer    3s linear     infinite; background-size: 200% 100%; }
   .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
 }
+
+
+.hero-bg {
+    /* Path ini berasumsi file CSS ada di folder src dan gambar ada di src/img */
+    background-image: url('./img/masjid.jpeg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
