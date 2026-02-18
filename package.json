@@ -2,7 +2,7 @@
   "name": "masjid-ash-shomad",
   "version": "1.0.0",
 "scripts": {
-  "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css"
+  "build": "tailwindcss -i ./src/input.css -o ./dist/output.css"
 },
   "devDependencies": {
     "tailwindcss": "^3.4.0",
