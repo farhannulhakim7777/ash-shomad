@@ -1,9 +1,9 @@
 {
   "name": "masjid-ash-shomad",
   "version": "1.0.0",
-  "scripts": {
-    "build": "echo Build complete"
-  },
+ "scripts": {
+  "build": "tailwindcss -i ./src/input.css -o ./dist/output.css"
+},
   "devDependencies": {
     "tailwindcss": "^3.4.0",
     "postcss": "^8.4.0",
