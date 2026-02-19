@@ -98,7 +98,7 @@
 
   function updateActive () {
     let cur = 'beranda'
-    ;['beranda', 'kegiatan', 'donasi', 'tentang'].forEach(id => {
+    ;['beranda', 'kegiatan', 'donasi', 'renovasi', 'tentang'].forEach(id => {
       const el = document.getElementById(id)
       if (el) {
         const r = el.getBoundingClientRect()
@@ -210,23 +210,24 @@ function initTyping () {
   setTimeout(typeNext, 900)
 }
 
-// ── Carousel ──
-function initCarousel () {
-  const track = document.getElementById('carousel-track')
-  const dotsEl = document.getElementById('carousel-dots')
-  const btnPrev = document.getElementById('carousel-prev')
-  const btnNext = document.getElementById('carousel-next')
+// ── Carousel factory — satu fungsi reusable untuk semua carousel ──
+function createCarousel (trackId, dotsId, prevId, nextId, cardClass) {
+  const track = document.getElementById(trackId)
+  const dotsEl = document.getElementById(dotsId)
+  const btnPrev = document.getElementById(prevId)
+  const btnNext = document.getElementById(nextId)
   if (!track) return
 
-  const cards = track.querySelectorAll('.carousel-card')
+  const cards = track.querySelectorAll('.' + cardClass)
   const total = cards.length
+  const cols = Math.ceil(total / 2) // grid 2 baris
   let current = 0
   let startX = 0
   let isDragging = false
   let dragOffset = 0
 
   dotsEl.innerHTML = ''
-  for (let i = 0; i < total; i++) {
+  for (let i = 0; i < cols; i++) {
     const dot = document.createElement('button')
     dot.className =
       'rounded-full transition-all duration-300 ' +
@@ -236,7 +237,7 @@ function initCarousel () {
     dotsEl.appendChild(dot)
   }
 
-  function getCardWidth () {
+  function getColWidth () {
     return cards[0].offsetWidth + 16
   }
 
@@ -249,10 +250,10 @@ function initCarousel () {
   }
 
   function goTo (index) {
-    current = Math.max(0, Math.min(index, total - 1))
+    current = Math.max(0, Math.min(index, cols - 1))
     track.style.transition =
       'transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-    track.style.transform = `translateX(-${current * getCardWidth()}px)`
+    track.style.transform = `translateX(-${current * getColWidth()}px)`
     updateDots()
   }
 
@@ -270,14 +271,14 @@ function initCarousel () {
     if (!isDragging) return
     dragOffset = x - startX
     track.style.transform = `translateX(${
-      -current * getCardWidth() + dragOffset
+      -current * getColWidth() + dragOffset
     }px)`
   }
 
   function onDragEnd () {
     if (!isDragging) return
     isDragging = false
-    const threshold = getCardWidth() * 0.25
+    const threshold = getColWidth() * 0.25
     if (dragOffset < -threshold) goTo(current + 1)
     else if (dragOffset > threshold) goTo(current - 1)
     else goTo(current)
@@ -297,16 +298,24 @@ function initCarousel () {
   })
   track.addEventListener('touchend', onDragEnd)
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') goTo(current - 1)
-    if (e.key === 'ArrowRight') goTo(current + 1)
-  })
-
   updateDots()
 }
 
 // ── Init semua setelah DOM ready ──
 window.addEventListener('DOMContentLoaded', () => {
   initTyping()
-  initCarousel()
+  createCarousel(
+    'carousel-track',
+    'carousel-dots',
+    'carousel-prev',
+    'carousel-next',
+    'carousel-card'
+  )
+  createCarousel(
+    'carousel-track-2',
+    'carousel-dots-2',
+    'carousel-prev-2',
+    'carousel-next-2',
+    'carousel-card-2'
+  )
 })
