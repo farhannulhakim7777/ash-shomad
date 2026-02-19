@@ -12,45 +12,174 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet" />
+
+  <style>
+    /* ── CSS Custom Properties ── */
+    :root {
+      --color-bg:   #011a14;
+      --color-fg:   rgba(255,255,255,0.92);
+      --color-fg-60: rgba(255,255,255,0.60);
+      --color-fg-50: rgba(255,255,255,0.50);
+      --color-fg-40: rgba(255,255,255,0.40);
+      --color-fg-30: rgba(255,255,255,0.30);
+      --color-gold:  #fbbf24;
+    }
+
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-fg);
+      min-height: 100vh;
+    }
+
+    .text-fg    { color: var(--color-fg); }
+    .text-fg-60 { color: var(--color-fg-60); }
+    .text-fg-50 { color: var(--color-fg-50); }
+    .text-fg-40 { color: var(--color-fg-40); }
+    .text-fg-30 { color: var(--color-fg-30); }
+
+    .glass-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .glass-card-strong {
+      background: rgba(2,44,34,0.85);
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .glow-gold { box-shadow: 0 0 20px rgba(251,191,36,0.25); }
+
+    /* ── FIX error baris 192: hero background image ── */
+    .hero-bg-img {
+      background-image: url('./src/img/masjid.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center 79%;
+    }
+
+    /* ── FIX error baris 194: hero overlay gradient ── */
+    .hero-overlay-gradient {
+      background: linear-gradient(
+        to bottom,
+        rgba(2,44,34,0.60) 0%,
+        rgba(2,44,34,0.05) 35%,
+        rgba(2,44,34,0.05) 65%,
+        rgba(2,44,34,0.75) 100%
+      );
+    }
+
+    /* ── FIX error baris 610: padding-top 16:9 featured video ── */
+    .ratio-16-9 { padding-top: 56.25%; }
+
+    /* ── FIX: featured-thumb hidden state pakai class, bukan inline style ── */
+    .thumb-hidden { display: none; }
+
+    /* ── Floating dock ── */
+    .dock-hidden {
+      opacity: 0;
+      transform: translate(-50%, 20px);
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .dock-visible {
+      opacity: 1;
+      transform: translate(-50%, 0px);
+      pointer-events: auto;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    /* ── Animations ── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-20px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .orb-delay     { animation-delay: -3s; }
+
+    .fade-in-up         { opacity: 0; }
+    .fade-in-up.visible { animation: fadeInUp 0.8s ease forwards; }
+
+    /* ── Nav active ── */
+    .nav-item.active {
+      background: rgba(251,191,36,0.15);
+      color: #fbbf24;
+    }
+
+    /* ── Map iframe ── */
+    .map-iframe { border: 0; display: block; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .modal-box {
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+
+    /* ── Video item active ── */
+    .video-item.active-video {
+      border-color: rgba(251,191,36,0.40) !important;
+      background: rgba(251,191,36,0.05);
+    }
+
+    /* ── FIX error baris 613 + Safari fix: user-select ── */
+    #carousel-track {
+      display: flex;
+      gap: 1rem;
+      cursor: grab;
+      -webkit-user-select: none; /* Safari iOS */
+      user-select: none;
+      will-change: transform;
+    }
+    #carousel-track:active { cursor: grabbing; }
+  </style>
 </head>
 
 <body class="min-h-screen">
 
   <!-- ════════════════════════════════════════════
-       HERO SECTION — foto masjid tampil penuh
+       HERO SECTION
   ═════════════════════════════════════════════ -->
   <section id="beranda" class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
-    <div class="absolute inset-0 bg-cover bg-no-repeat"
-      style="background-image: url('./src/img/masjid.jpeg'); background-position: center 79%;">
-    </div>
+    <!-- FIX baris 192: ganti inline style → class hero-bg-img -->
+    <div class="absolute inset-0 hero-bg-img"></div>
 
-    <!-- Vignette tipis atas & bawah saja, tengah tetap terbuka -->
-    <div class="absolute inset-0"
-      style="background: linear-gradient(to bottom, rgba(2,44,34,0.60) 0%, rgba(2,44,34,0.05) 35%, rgba(2,44,34,0.05) 65%, rgba(2,44,34,0.75) 100%);">
-    </div>
+    <!-- FIX baris 194: ganti inline style → class hero-overlay-gradient -->
+    <div class="absolute inset-0 hero-overlay-gradient"></div>
 
     <div
       class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#064e3b]/20 blur-[100px] animate-float pointer-events-none">
     </div>
     <div
-      class="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-[#fbbf24]/8 blur-[120px] animate-float orb-delay pointer-events-none">
+      class="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-[#fbbf24]/10 blur-[120px] animate-float orb-delay pointer-events-none">
     </div>
 
-    <!-- Konten tengah: hanya badge + judul + tagline -->
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
       <div class="fade-in-up" id="hero-text">
-
         <div class="inline-flex items-center gap-2 glass-card rounded-full px-5 py-2 mb-8">
           <span class="w-2 h-2 rounded-full bg-[#fbbf24] animate-pulse"></span>
           <span class="text-sm text-[#fbbf24]/90 font-medium tracking-wide uppercase">Official Account</span>
         </div>
-
         <h1
           class="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[1.0] tracking-tight mb-6 drop-shadow-2xl bg-gradient-to-r from-white via-[#fde68a] to-[#f59e0b] bg-clip-text text-transparent">
           Masjid&nbsp;Ash-Shomad
         </h1>
-
         <div class="relative max-w-lg mx-auto">
           <p class="text-base md:text-lg leading-relaxed invisible select-none" aria-hidden="true">
             Pusat ibadah, kajian ilmu, dan kegiatan sosial untuk membangun umat yang berdaya dan berakhlak mulia.
@@ -59,17 +188,13 @@
             class="absolute inset-0 text-base md:text-lg text-fg-60 leading-relaxed drop-shadow whitespace-pre-wrap">
           </p>
         </div>
-
       </div>
     </div>
-
   </section>
 
-
+  <!-- ACTION BAR -->
   <div id="action-bar" class="relative z-20 bg-[#022c22]/95 backdrop-blur-md border-t border-[#fbbf24]/10">
     <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col lg:flex-row items-center justify-between gap-4">
-
-      <!-- Waktu shalat -->
       <div class="flex items-center gap-3 w-full lg:w-auto">
         <div class="flex items-center gap-2 shrink-0">
           <svg class="w-4 h-4 text-[#fbbf24]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -82,9 +207,7 @@
         <div class="grid grid-cols-5 gap-2 flex-1" id="prayer-grid"></div>
         <span id="live-clock" class="text-sm text-[#fbbf24] font-mono shrink-0 hidden sm:block">00:00:00</span>
       </div>
-
-      <!-- CTA Buttons -->
-      <div class="flex items-center gap-3 shrink-0">
+      <div class="flex items-center gap-3 shrink-0 flex-wrap justify-center">
         <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer"
           class="group flex items-center gap-2 bg-[#fbbf24] text-[#022c22] font-semibold px-5 py-2.5 rounded-xl hover:scale-105 transition-all duration-300 glow-gold text-sm whitespace-nowrap">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -93,6 +216,15 @@
           </svg>
           Layanan Umat
         </a>
+        <button id="open-modal"
+          class="group flex items-center gap-2 glass-card text-fg-50 hover:text-[#fbbf24] font-semibold px-5 py-2.5 rounded-xl hover:scale-105 hover:bg-[#fbbf24]/10 transition-all duration-300 text-sm whitespace-nowrap border border-[#fbbf24]/20">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          Infaq Digital
+        </button>
         <a href="#kegiatan"
           class="group flex items-center gap-2 glass-card text-fg font-semibold px-5 py-2.5 rounded-xl hover:scale-105 hover:bg-white/10 transition-all duration-300 text-sm whitespace-nowrap">
           Jelajahi Kegiatan
@@ -103,27 +235,24 @@
           </svg>
         </a>
       </div>
-
     </div>
   </div>
-
 
   <!-- ════════════════════════════════════════════
        ACTIVITIES SECTION
   ═════════════════════════════════════════════ -->
   <section id="kegiatan" class="relative py-24 px-6">
     <div class="max-w-6xl mx-auto">
-
       <div class="mb-16 text-center">
         <span class="inline-block text-[#fbbf24] text-sm font-semibold tracking-widest uppercase mb-4">Ekosistem
           Kegiatan</span>
         <h2 class="text-3xl md:text-5xl font-bold text-fg mb-4">Pusat Aktivitas Umat</h2>
-        <p class="text-fg-50 max-w-xl mx-auto leading-relaxed">Beragam kegiatan untuk membangun spiritualitas, ilmu, dan
-          kebersamaan jamaah.</p>
+        <p class="text-fg-50 max-w-xl mx-auto leading-relaxed">Beragam kegiatan untuk membangun spiritualitas, ilmu,
+          dan kebersamaan jamaah.</p>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
+        <!-- Kajian Rutin -->
         <div
           class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden md:col-span-2">
           <div
@@ -150,6 +279,7 @@
           </div>
         </div>
 
+        <!-- TPA -->
         <div
           class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
           <div
@@ -166,7 +296,8 @@
                   <path d="M6 12v5c3 3 9 3 12 0v-5" />
                 </svg>
               </div>
-              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Senin – Jumat, 16:00</span>
+              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Senin – Jumat,
+                16:00</span>
             </div>
             <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">TPA
               Al-Quran</h3>
@@ -175,6 +306,7 @@
           </div>
         </div>
 
+        <!-- Majelis Taklim -->
         <div
           class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
           <div
@@ -193,14 +325,16 @@
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
               </div>
-              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Setiap Rabu, 09:00</span>
+              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Setiap Rabu,
+                09:00</span>
             </div>
-            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">Majelis
-              Taklim</h3>
+            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">
+              Majelis Taklim</h3>
             <p class="text-sm text-fg-50 leading-relaxed">Forum diskusi dan sharing ilmu untuk ibu-ibu jamaah.</p>
           </div>
         </div>
 
+        <!-- Khutbah -->
         <div
           class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
           <div
@@ -217,15 +351,17 @@
                   <circle cx="17" cy="7" r="5" />
                 </svg>
               </div>
-              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Setiap Jumat, 12:00</span>
+              <span class="text-xs text-fg-40 font-mono bg-white/5 px-3 py-1 rounded-full">Setiap Jumat,
+                12:00</span>
             </div>
-            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">Khutbah
-              & Ceramah</h3>
-            <p class="text-sm text-fg-50 leading-relaxed">Ceramah inspiratif dan khutbah Jumat yang mencerahkan hati dan
-              pikiran jamaah.</p>
+            <h3 class="text-lg font-bold text-fg mb-2 group-hover:text-[#fbbf24] transition-colors duration-300">
+              Khutbah &amp; Ceramah</h3>
+            <p class="text-sm text-fg-50 leading-relaxed">Ceramah inspiratif dan khutbah Jumat yang mencerahkan hati
+              dan pikiran jamaah.</p>
           </div>
         </div>
 
+        <!-- Kegiatan Sosial -->
         <div
           class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
           <div
@@ -251,6 +387,7 @@
           </div>
         </div>
 
+        <!-- Event Islami -->
         <div
           class="group relative glass-card rounded-2xl p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
           <div
@@ -282,13 +419,11 @@
     </div>
   </section>
 
-
   <!-- ════════════════════════════════════════════
        GALERI KEGIATAN SECTION (carousel)
   ═════════════════════════════════════════════ -->
-  <section id="donasi" class="relative py-24 px-6 overflow-hidden">
+  <section id="donasi" class="relative py-24 px-6">
     <div class="max-w-6xl mx-auto">
-
       <div class="mb-12 text-center">
         <span class="inline-block text-[#fbbf24] text-sm font-semibold tracking-widest uppercase mb-4">Galeri
           Kegiatan</span>
@@ -297,17 +432,12 @@
           bersama jamaah.</p>
       </div>
 
-      <!-- Carousel wrapper -->
-      <div class="relative group">
-
-        <!-- Track -->
-        <div id="carousel-track" class="flex gap-4 cursor-grab active:cursor-grabbing select-none"
-          style="transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
-
-          <!-- Card 1 -->
-          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+      <div class="relative overflow-hidden rounded-2xl">
+        <div id="carousel-track">
+          <div
+            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
-              <img src="./src/img/kegiatan-1.jpeg" alt="Kajian Rutin" class="w-full h-full object-cover"
+              <img src="./src/img/makangratis.jpg" alt="Kajian Rutin" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
               <div class="absolute inset-0 hidden items-center justify-center flex-col gap-2 text-fg-30">
                 <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -325,12 +455,12 @@
             </div>
             <div class="p-5">
               <h3 class="text-base font-bold text-fg mb-1">Kajian Ba'da Subuh</h3>
-              <p class="text-sm text-fg-50 leading-relaxed">Kajian rutin setiap Ahad pagi bersama ustadz terpercaya.</p>
+              <p class="text-sm text-fg-50 leading-relaxed">Kajian rutin setiap Ahad pagi bersama ustadz terpercaya.
+              </p>
             </div>
           </div>
-
-          <!-- Card 2 -->
-          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+          <div
+            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
               <img src="./src/img/kegiatan-2.jpeg" alt="TPA Al-Quran" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -350,13 +480,12 @@
             </div>
             <div class="p-5">
               <h3 class="text-base font-bold text-fg mb-1">TPA Al-Quran Anak</h3>
-              <p class="text-sm text-fg-50 leading-relaxed">Pendidikan Al-Quran untuk anak-anak setiap Senin–Jumat sore.
-              </p>
+              <p class="text-sm text-fg-50 leading-relaxed">Pendidikan Al-Quran untuk anak-anak setiap Senin–Jumat
+                sore.</p>
             </div>
           </div>
-
-          <!-- Card 3 -->
-          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+          <div
+            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
               <img src="./src/img/kegiatan-3.jpeg" alt="Kegiatan Sosial" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -380,9 +509,8 @@
               </p>
             </div>
           </div>
-
-          <!-- Card 4 -->
-          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+          <div
+            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
               <img src="./src/img/kegiatan-4.jpeg" alt="Ramadhan" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -404,9 +532,8 @@
               <p class="text-sm text-fg-50 leading-relaxed">Buka puasa bersama, tarawih, dan itikaf di bulan suci.</p>
             </div>
           </div>
-
-          <!-- Card 5 -->
-          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+          <div
+            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
               <img src="./src/img/kegiatan-5.jpeg" alt="Majelis Taklim" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -429,31 +556,220 @@
               <p class="text-sm text-fg-50 leading-relaxed">Forum diskusi dan sharing ilmu setiap Rabu pagi.</p>
             </div>
           </div>
-
         </div>
+      </div>
+      <div id="carousel-dots" class="flex items-center justify-center gap-2 mt-6"></div>
+    </div>
+  </section>
 
-        <!-- Tombol navigasi -->
-        <!-- Tombol navigasi -->
-        <button id="carousel-prev" aria-label="Slide sebelumnya"
-          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full glass-card-strong flex items-center justify-center text-fg hover:text-[#fbbf24] transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 shadow-lg">
-          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
-        <button id="carousel-next" aria-label="Slide berikutnya"
-          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full glass-card-strong flex items-center justify-center text-fg hover:text-[#fbbf24] transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 shadow-lg">
-          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
+  <!-- ════════════════════════════════════════════
+       TONTONAN TERBARU
+  ═════════════════════════════════════════════ -->
+  <section id="tontonan" class="relative py-24 px-6 overflow-hidden">
+    <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-[#064e3b]/20 blur-[120px] pointer-events-none">
+    </div>
+    <div class="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-[#fbbf24]/5 blur-[100px] pointer-events-none">
+    </div>
 
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="mb-14 text-center">
+        <span class="inline-block text-[#fbbf24] text-sm font-semibold tracking-widest uppercase mb-4">Tonton &amp;
+          Simak</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-fg mb-4">Tontonan Terbaru</h2>
+        <p class="text-fg-50 max-w-xl mx-auto leading-relaxed">Kajian, ceramah, dan dokumentasi kegiatan Masjid
+          Ash-Shomad langsung dari kanal YouTube kami.</p>
       </div>
 
-      <!-- Dots indicator -->
-      <div id="carousel-dots" class="flex items-center justify-center gap-2 mt-6"></div>
+      <div class="grid lg:grid-cols-[1fr_360px] gap-6 items-start">
 
+        <!-- Featured Card -->
+        <div class="group glass-card rounded-2xl overflow-hidden hover:scale-[1.005] transition-all duration-500">
+
+          <!-- FIX baris 610: ganti style="padding-top:56.25%" → class ratio-16-9 -->
+          <a id="featured-link" href="https://www.youtube.com/@Masjid_Ash-shomad_official/" target="_blank"
+            rel="noopener noreferrer"
+            class="block relative w-full bg-[#064e3b]/60 overflow-hidden ratio-16-9">
+
+            <!-- FIX baris 613: ganti style="display:none" → class thumb-hidden (dikontrol JS) -->
+            <img id="featured-thumb" src="" alt="Thumbnail Video"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 thumb-hidden" />
+
+            <div id="featured-placeholder"
+              class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#064e3b]/60">
+              <svg class="w-14 h-14 text-[#fbbf24]/25" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+              <span class="text-xs text-fg-40 font-medium">Pilih video dari daftar</span>
+            </div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none">
+            </div>
+            <span id="featured-duration"
+              class="absolute top-3 right-3 z-10 text-xs font-mono text-white bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-lg">–:––</span>
+            <div
+              class="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div
+                class="w-16 h-16 rounded-full bg-[#fbbf24] flex items-center justify-center shadow-2xl scale-90 group-hover:scale-100 transition-transform duration-300">
+                <svg class="w-7 h-7 text-[#022c22] ml-1" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-5">
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
+                <span id="featured-category"
+                  class="inline-flex items-center text-[11px] font-bold text-[#022c22] bg-[#fbbf24] px-3 py-0.5 rounded-full">Kajian</span>
+                <span id="featured-date" class="text-[11px] text-white/50 font-mono"></span>
+              </div>
+              <h3 id="featured-title"
+                class="text-sm sm:text-base md:text-lg font-bold text-white leading-snug line-clamp-2">
+                Pilih video dari daftar di bawah.
+              </h3>
+            </div>
+          </a>
+          <div class="px-4 py-3 sm:px-5 sm:py-4 flex items-center justify-between gap-3 flex-wrap"></div>
+        </div>
+
+        <!-- Sidebar List -->
+        <div class="flex flex-col gap-2.5" id="video-sidebar">
+
+          <!-- Item 1 -->
+          <a href="https://www.youtube.com/watch?v=Z6jARArg2qM" target="_blank" rel="noopener noreferrer"
+            class="video-item group glass-card rounded-xl p-3 flex gap-3 border border-transparent hover:border-[#fbbf24]/20 hover:scale-[1.02] transition-all duration-300"
+            data-video-id="Z6jARArg2qM" data-title="Khutbah Jum'at (Dr. KH. Nur Achmad, MA.)"
+            data-category="Khutbah Jum'at" data-date="Khutbah Shalat Jumat" data-duration="1:19:50">
+            <div class="relative shrink-0 w-28 h-16 rounded-lg overflow-hidden bg-[#064e3b]/40">
+              <img src="https://i.ytimg.com/vi/Z6jARArg2qM/mqdefault.jpg" alt="" class="w-full h-full object-cover"
+                onerror="this.style.display='none'" />
+              <div
+                class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div class="w-7 h-7 rounded-full bg-[#fbbf24] flex items-center justify-center">
+                  <svg class="w-3 h-3 text-[#022c22] ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <span
+                class="absolute bottom-1 right-1 text-[10px] font-mono text-white bg-black/70 px-1.5 py-0.5 rounded">1:19:50</span>
+            </div>
+            <div class="flex-1 min-w-0 py-0.5">
+              <span
+                class="inline-block text-[10px] font-bold text-[#fbbf24] bg-[#fbbf24]/10 px-2 py-0.5 rounded-full mb-1">Dr.
+                KH. Nur Achmad, MA.</span>
+              <p
+                class="text-xs font-semibold text-fg line-clamp-2 leading-relaxed group-hover:text-[#fbbf24] transition-colors duration-300">
+                Khutbah Jum'at</p>
+              <p class="text-[10px] text-fg-40 mt-0.5">Khutbah Shalat Jumat</p>
+            </div>
+          </a>
+
+          <!-- Item 2 -->
+          <a href="https://www.youtube.com/watch?v=coPxS8rT-lA" target="_blank" rel="noopener noreferrer"
+            class="video-item group glass-card rounded-xl p-3 flex gap-3 border border-transparent hover:border-[#fbbf24]/20 hover:scale-[1.02] transition-all duration-300"
+            data-video-id="coPxS8rT-lA" data-title="Haji Adalah Panggilan Allah?? (Dr. KH. Muhammad Ziyad, M.Ag.)"
+            data-category="Ceramah" data-date="Haji adalah panggilan ALLAH SWT." data-duration="19:07">
+            <div class="relative shrink-0 w-28 h-16 rounded-lg overflow-hidden bg-[#064e3b]/40">
+              <img src="https://i.ytimg.com/vi/coPxS8rT-lA/mqdefault.jpg" alt="" class="w-full h-full object-cover"
+                onerror="this.style.display='none'" />
+              <div
+                class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div class="w-7 h-7 rounded-full bg-[#fbbf24] flex items-center justify-center">
+                  <svg class="w-3 h-3 text-[#022c22] ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <span
+                class="absolute bottom-1 right-1 text-[10px] font-mono text-white bg-black/70 px-1.5 py-0.5 rounded">19:07</span>
+            </div>
+            <div class="flex-1 min-w-0 py-0.5">
+              <span
+                class="inline-block text-[10px] font-bold text-[#fbbf24] bg-[#fbbf24]/10 px-2 py-0.5 rounded-full mb-1">Dr.
+                KH. Muhammad Ziyad, M.Ag.</span>
+              <p
+                class="text-xs font-semibold text-fg line-clamp-2 leading-relaxed group-hover:text-[#fbbf24] transition-colors duration-300">
+                Haji Adalah Panggilan Allah??</p>
+              <p class="text-[10px] text-fg-40 mt-0.5">Haji adalah panggilan ALLAH SWT.</p>
+            </div>
+          </a>
+
+          <!-- Item 3 -->
+          <a href="https://www.youtube.com/watch?v=c94E3ufm1vA" target="_blank" rel="noopener noreferrer"
+            class="video-item group glass-card rounded-xl p-3 flex gap-3 border border-transparent hover:border-[#fbbf24]/20 hover:scale-[1.02] transition-all duration-300"
+            data-video-id="c94E3ufm1vA" data-title="Peringatan Maulid Nabi Muhammad SAW (Wakil Menteri Agama RI)"
+            data-category="Maulid Nabi" data-date="Peringatan Maulid Nabi Muhammad SAW." data-duration="50:00">
+            <div class="relative shrink-0 w-28 h-16 rounded-lg overflow-hidden bg-[#064e3b]/40">
+              <img src="https://i.ytimg.com/vi/c94E3ufm1vA/mqdefault.jpg" alt="" class="w-full h-full object-cover"
+                onerror="this.style.display='none'" />
+              <div
+                class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div class="w-7 h-7 rounded-full bg-[#fbbf24] flex items-center justify-center">
+                  <svg class="w-3 h-3 text-[#022c22] ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <span
+                class="absolute bottom-1 right-1 text-[10px] font-mono text-white bg-black/70 px-1.5 py-0.5 rounded">50:00</span>
+            </div>
+            <div class="flex-1 min-w-0 py-0.5">
+              <span
+                class="inline-block text-[10px] font-bold text-[#fbbf24] bg-[#fbbf24]/10 px-2 py-0.5 rounded-full mb-1">Dr.
+                KH. Zainut Tauhid Sa'adi, M.Si.</span>
+              <p
+                class="text-xs font-semibold text-fg line-clamp-2 leading-relaxed group-hover:text-[#fbbf24] transition-colors duration-300">
+                Peringatan Maulid Nabi Muhammad SAW (Wakil Menteri Agama RI)</p>
+              <p class="text-[10px] text-fg-40 mt-0.5">Peringatan Maulid Nabi Muhammad SAW.</p>
+            </div>
+          </a>
+
+          <!-- Item 4 -->
+          <a href="https://www.youtube.com/watch?v=rYkk1FN7oek" target="_blank" rel="noopener noreferrer"
+            class="video-item group glass-card rounded-xl p-3 flex gap-3 border border-transparent hover:border-[#fbbf24]/20 hover:scale-[1.02] transition-all duration-300"
+            data-video-id="rYkk1FN7oek"
+            data-title="Meneladani Perjuangan Nabiyullah Ibrahim dan Ismail dalam kehidupan"
+            data-category="Idul Adha" data-date="Khatib Idul Qurban." data-duration="22:35">
+            <div class="relative shrink-0 w-28 h-16 rounded-lg overflow-hidden bg-[#064e3b]/40">
+              <img src="https://i.ytimg.com/vi/rYkk1FN7oek/mqdefault.jpg" alt="" class="w-full h-full object-cover"
+                onerror="this.style.display='none'" />
+              <div
+                class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div class="w-7 h-7 rounded-full bg-[#fbbf24] flex items-center justify-center">
+                  <svg class="w-3 h-3 text-[#022c22] ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <span
+                class="absolute bottom-1 right-1 text-[10px] font-mono text-white bg-black/70 px-1.5 py-0.5 rounded">22:35</span>
+            </div>
+            <div class="flex-1 min-w-0 py-0.5">
+              <span
+                class="inline-block text-[10px] font-bold text-[#fbbf24] bg-[#fbbf24]/10 px-2 py-0.5 rounded-full mb-1">Dr.
+                KH. Marjuki Al-Jawiy, MA.</span>
+              <p
+                class="text-xs font-semibold text-fg line-clamp-2 leading-relaxed group-hover:text-[#fbbf24] transition-colors duration-300">
+                Meneladani Perjuangan Nabiyullah Ibrahim dan Ismail dalam kehidupan</p>
+              <p class="text-[10px] text-fg-40 mt-0.5">Khatib Idul Qurban.</p>
+            </div>
+          </a>
+
+          <!-- Lihat Semua -->
+          <a href="https://www.youtube.com/@Masjid_Ash-shomad_official/" target="_blank" rel="noopener noreferrer"
+            class="group flex items-center justify-center gap-2 bg-[#064e3b]/40 hover:bg-[#fbbf24] border border-[#fbbf24]/20 hover:border-transparent text-[#fbbf24] hover:text-[#022c22] font-semibold text-sm px-5 py-3.5 rounded-xl transition-all duration-300 hover:scale-[1.02] mt-1">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg>
+            Lihat Semua Video
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -463,21 +779,17 @@
   <section id="tentang" class="relative py-24 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="grid lg:grid-cols-2 gap-12 items-start">
-
         <div>
           <span class="inline-block text-[#fbbf24] text-sm font-semibold tracking-widest uppercase mb-4">Tentang
             Kami</span>
           <h2 class="text-3xl md:text-5xl font-bold text-fg mb-6 leading-tight">
-            Rumah Ibadah di&nbsp;
-            <span class="bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text text-transparent">Jantung Citra
+            Rumah Ibadah di&nbsp;<span
+              class="bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text text-transparent">Jantung Citra
               Raya</span>
           </h2>
-          <p class="text-fg-50 leading-relaxed mb-8">
-            Masjid Ash-Shomad berdiri sebagai pusat peribadatan dan kegiatan sosial di kawasan Citra Raya, Tangerang.
-            Dengan komitmen untuk membangun umat yang berdaya, kami menghadirkan berbagai program kajian,
-            pendidikan Al-Quran, dan kegiatan sosial yang berkesinambungan.
-          </p>
-
+          <p class="text-fg-50 leading-relaxed mb-8">Masjid Ash-Shomad berdiri sebagai pusat peribadatan dan kegiatan
+            sosial di kawasan Citra Raya, Tangerang. Dengan komitmen untuk membangun umat yang berdaya, kami
+            menghadirkan berbagai program kajian, pendidikan Al-Quran, dan kegiatan sosial yang berkesinambungan.</p>
           <div class="flex flex-col gap-4">
             <div
               class="glass-card rounded-xl p-5 flex items-start gap-4 hover:scale-[1.02] transition-all duration-300">
@@ -495,7 +807,6 @@
                   Tangerang</p>
               </div>
             </div>
-
             <div
               class="glass-card rounded-xl p-5 flex items-start gap-4 hover:scale-[1.02] transition-all duration-300">
               <div class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24]">
@@ -512,11 +823,11 @@
                   class="text-sm text-[#fbbf24] hover:underline">WhatsApp: 081218612022</a>
               </div>
             </div>
-
             <a href="https://maps.google.com/?q=Masjid+Ash-Shomad+Citra+Raya+Tangerang" target="_blank"
               rel="noopener noreferrer"
               class="glass-card rounded-xl p-5 flex items-center gap-4 hover:scale-[1.02] transition-all duration-300 group">
-              <div class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors">
+              <div
+                class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors">
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   aria-hidden="true">
@@ -530,28 +841,23 @@
             </a>
           </div>
         </div>
-
         <div class="relative">
           <div class="glass-card rounded-2xl overflow-hidden">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2!2d106.5!3d-6.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTgnMDAuMCJTIDEwNsKwMzAnMDAuMCJF!5e0!3m2!1sid!2sid!4v1"
               width="100%" height="400" allowfullscreen loading="lazy" referrerpolicy="no-referrer"
-              title="Lokasi Masjid Ash-Shomad" class="map-iframe rounded-2xl">
-            </iframe>
+              title="Lokasi Masjid Ash-Shomad" class="map-iframe rounded-2xl"></iframe>
           </div>
           <div class="absolute bottom-4 left-4 right-4 glass-card-strong rounded-xl p-4">
             <p class="text-sm font-semibold text-fg flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#fbbf24] animate-pulse"></span>
-              Masjid Ash-Shomad
+              <span class="w-2 h-2 rounded-full bg-[#fbbf24] animate-pulse"></span>Masjid Ash-Shomad
             </p>
             <p class="text-xs text-fg-40 mt-1">Citra Raya, Tangerang</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
-
 
   <!-- ════════════════════════════════════════════
        FOOTER
@@ -568,8 +874,11 @@
           <h4 class="text-sm font-semibold text-fg-50 uppercase tracking-wider mb-3">Tautan</h4>
           <ul class="flex flex-col gap-2">
             <li><a href="#beranda" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Beranda</a></li>
-            <li><a href="#kegiatan" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Kegiatan</a></li>
-            <li><a href="#donasi" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Donasi</a></li>
+            <li><a href="#kegiatan" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Kegiatan</a>
+            </li>
+            <li><a href="#donasi" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Galeri</a></li>
+            <li><a href="#tontonan" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Tontonan</a>
+            </li>
             <li><a href="#tentang" class="text-sm text-fg-40 hover:text-[#fbbf24] transition-colors">Tentang</a></li>
           </ul>
         </div>
@@ -596,17 +905,17 @@
     </div>
   </footer>
 
-
   <!-- ════════════════════════════════════════════
        FLOATING DOCK
   ═════════════════════════════════════════════ -->
-  <nav id="floating-dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 dock-hidden" aria-label="Navigasi utama">
+  <nav id="floating-dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 dock-hidden"
+    aria-label="Navigasi utama">
     <div class="glass-card-strong rounded-2xl px-2 py-2 flex items-center gap-1">
       <a href="#beranda" data-section="beranda"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Beranda">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
           <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
@@ -615,8 +924,8 @@
       <a href="#kegiatan" data-section="kegiatan"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Kegiatan">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
           <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
         </svg>
@@ -624,19 +933,31 @@
       </a>
       <a href="#donasi" data-section="donasi"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
-        aria-label="Donasi">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path
-            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        aria-label="Galeri">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" />
+          <polyline points="21 15 16 10 5 21" />
         </svg>
-        <span class="nav-label text-xs font-medium hidden sm:inline">Donasi</span>
+        <span class="nav-label text-xs font-medium hidden sm:inline">Galeri</span>
+      </a>
+      <a href="#tontonan" data-section="tontonan"
+        class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
+        aria-label="Tontonan">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path
+            d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+        </svg>
+        <span class="nav-label text-xs font-medium hidden sm:inline">Tontonan</span>
       </a>
       <a href="#tentang" data-section="tentang"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Tentang">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
           <circle cx="12" cy="10" r="3" />
         </svg>
@@ -645,8 +966,8 @@
       <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Kontak via WhatsApp">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
         <span class="nav-label text-xs font-medium hidden sm:inline">Kontak</span>
@@ -654,18 +975,17 @@
     </div>
   </nav>
 
-
   <!-- ════════════════════════════════════════════
        DONATION MODAL
   ═════════════════════════════════════════════ -->
-  <div id="donation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay" role="dialog"
-    aria-modal="true" aria-labelledby="modal-title">
+  <div id="donation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay"
+    role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="absolute inset-0 bg-[#022c22]/80 backdrop-blur-sm" id="modal-backdrop"></div>
     <div class="modal-box relative glass-card-strong rounded-3xl p-8 max-w-md w-full">
       <button id="close-modal" aria-label="Tutup modal donasi"
         class="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-fg-50">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
@@ -687,8 +1007,6 @@
   </div>
 
   <script src="/src/js/main.js"></script>
-
-
 </body>
 
 </html>

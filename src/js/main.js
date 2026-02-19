@@ -64,14 +64,14 @@
                 ${
                   i === idx ? 'text-[#fbbf24]' : 'text-transparent select-none'
                 }">&nbsp;NEXT&nbsp;</span>
-              <span class="${i === idx ? 'text-[#fbbf24]' : 'text-fg-50'}">${
-            p.icon
-          }</span>
+              <span class="${
+                i === idx ? 'text-[#fbbf24]' : 'text-[rgba(255,255,255,0.5)]'
+              }">${p.icon}</span>
               <span class="text-[10px] font-medium ${
-                i === idx ? 'text-[#fbbf24]' : 'text-fg-50'
+                i === idx ? 'text-[#fbbf24]' : 'text-[rgba(255,255,255,0.5)]'
               }">${p.name}</span>
               <span class="text-xs font-bold font-mono ${
-                i === idx ? 'text-[#fbbf24]' : 'text-fg'
+                i === idx ? 'text-[#fbbf24]' : 'text-[rgba(255,255,255,0.9)]'
               }">${p.time}</span>
             </div>`
         ).join('')
@@ -96,9 +96,10 @@
     }, 1000)
   })
 
+  // FIX: Ganti 'renovasi' → 'tontonan' sesuai section yang ada di HTML
   function updateActive () {
     let cur = 'beranda'
-    ;['beranda', 'kegiatan', 'donasi', 'renovasi', 'tentang'].forEach(id => {
+    ;['beranda', 'kegiatan', 'donasi', 'tontonan', 'tentang'].forEach(id => {
       const el = document.getElementById(id)
       if (el) {
         const r = el.getBoundingClientRect()
@@ -108,14 +109,13 @@
     document.querySelectorAll('.nav-item[data-section]').forEach(a => {
       const active = a.dataset.section === cur
       a.classList.toggle('active', active)
-      a.classList.toggle('bg-[#fbbf24]/15', active)
-      a.classList.toggle('text-[#fbbf24]', active)
       a.classList.toggle('text-fg-50', !active)
     })
   }
   window.addEventListener('scroll', updateActive, { passive: true })
   updateActive()
 
+  // Donation accounts
   const ACCOUNTS = [
     { bank: 'BSI', number: '7182 9012 34', name: 'Masjid Ash-Shomad' },
     { bank: 'BCA', number: '5320 1847 62', name: 'Yayasan Ash-Shomad' },
@@ -130,12 +130,14 @@
         <div class="flex items-center justify-between p-4 rounded-xl bg-white/[0.05] border border-white/[0.08] hover:border-[#fbbf24]/30 transition-all">
           <div>
             <p class="text-sm font-bold text-[#fbbf24]">${a.bank}</p>
-            <p class="text-lg font-mono text-fg">${a.number}</p>
-            <p class="text-xs text-fg-40">${a.name}</p>
+            <p class="text-lg font-mono" style="color:rgba(255,255,255,0.9)">${
+              a.number
+            }</p>
+            <p class="text-xs" style="color:rgba(255,255,255,0.4)">${a.name}</p>
           </div>
           <button onclick="copyAcc('${a.number.replace(/\s/g, '')}', this)"
             aria-label="Salin nomor rekening ${a.bank}"
-            class="p-2.5 rounded-lg bg-white/10 hover:bg-[#fbbf24]/20 transition-colors text-fg-50 hover:text-[#fbbf24]">
+            class="p-2.5 rounded-lg bg-white/10 hover:bg-[#fbbf24]/20 transition-colors" style="color:rgba(255,255,255,0.5)">
             <svg class="w-4 h-4 copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
@@ -143,6 +145,7 @@
         </div>`
     ).join('')
 
+  // FIX: Modal sekarang bisa dibuka via tombol #open-modal yang sudah ditambahkan di HTML
   if (modal) {
     document
       .getElementById('open-modal')
@@ -163,12 +166,12 @@
       btn.querySelector(
         '.copy-icon'
       ).innerHTML = `<polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
-      btn.classList.add('text-green-400')
+      btn.style.color = '#4ade80'
       setTimeout(() => {
         btn.querySelector(
           '.copy-icon'
         ).innerHTML = `<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>`
-        btn.classList.remove('text-green-400')
+        btn.style.color = ''
       }, 2000)
     })
   }
@@ -210,38 +213,40 @@ function initTyping () {
   setTimeout(typeNext, 900)
 }
 
-// ── Carousel factory — satu fungsi reusable untuk semua carousel ──
-function createCarousel (trackId, dotsId, prevId, nextId, cardClass) {
+// ── Carousel — drag/swipe only ──
+function createCarousel (trackId, dotsId, cardClass) {
   const track = document.getElementById(trackId)
   const dotsEl = document.getElementById(dotsId)
-  const btnPrev = document.getElementById(prevId)
-  const btnNext = document.getElementById(nextId)
   if (!track) return
 
   const cards = track.querySelectorAll('.' + cardClass)
   const total = cards.length
-  const cols = Math.ceil(total / 2) // grid 2 baris
+  if (total === 0) return
+
   let current = 0
   let startX = 0
   let isDragging = false
   let dragOffset = 0
 
-  dotsEl.innerHTML = ''
-  for (let i = 0; i < cols; i++) {
-    const dot = document.createElement('button')
-    dot.className =
-      'rounded-full transition-all duration-300 ' +
-      (i === 0 ? 'bg-[#fbbf24] w-5 h-2' : 'bg-white/20 w-2 h-2')
-    dot.setAttribute('aria-label', `Slide ${i + 1}`)
-    dot.addEventListener('click', () => goTo(i))
-    dotsEl.appendChild(dot)
+  if (dotsEl) {
+    dotsEl.innerHTML = ''
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('button')
+      dot.className =
+        'rounded-full transition-all duration-300 ' +
+        (i === 0 ? 'bg-[#fbbf24] w-5 h-2' : 'bg-white/20 w-2 h-2')
+      dot.setAttribute('aria-label', `Slide ${i + 1}`)
+      dot.addEventListener('click', () => goTo(i))
+      dotsEl.appendChild(dot)
+    }
   }
 
-  function getColWidth () {
+  function getCardWidth () {
     return cards[0].offsetWidth + 16
   }
 
   function updateDots () {
+    if (!dotsEl) return
     dotsEl.querySelectorAll('button').forEach((dot, i) => {
       dot.className =
         'rounded-full transition-all duration-300 ' +
@@ -250,15 +255,12 @@ function createCarousel (trackId, dotsId, prevId, nextId, cardClass) {
   }
 
   function goTo (index) {
-    current = Math.max(0, Math.min(index, cols - 1))
+    current = Math.max(0, Math.min(index, total - 1))
     track.style.transition =
       'transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-    track.style.transform = `translateX(-${current * getColWidth()}px)`
+    track.style.transform = `translateX(-${current * getCardWidth()}px)`
     updateDots()
   }
-
-  btnPrev?.addEventListener('click', () => goTo(current - 1))
-  btnNext?.addEventListener('click', () => goTo(current + 1))
 
   function onDragStart (x) {
     isDragging = true
@@ -271,14 +273,14 @@ function createCarousel (trackId, dotsId, prevId, nextId, cardClass) {
     if (!isDragging) return
     dragOffset = x - startX
     track.style.transform = `translateX(${
-      -current * getColWidth() + dragOffset
+      -current * getCardWidth() + dragOffset
     }px)`
   }
 
   function onDragEnd () {
     if (!isDragging) return
     isDragging = false
-    const threshold = getColWidth() * 0.25
+    const threshold = getCardWidth() * 0.25
     if (dragOffset < -threshold) goTo(current + 1)
     else if (dragOffset > threshold) goTo(current - 1)
     else goTo(current)
@@ -301,21 +303,97 @@ function createCarousel (trackId, dotsId, prevId, nextId, cardClass) {
   updateDots()
 }
 
+// ── YouTube featured section ──
+function initYoutube () {
+  const CHANNEL_URL = 'https://www.youtube.com/@Masjid_Ash-shomad_official/'
+
+  const elThumb = document.getElementById('featured-thumb')
+  const elPlaceholder = document.getElementById('featured-placeholder')
+  const elTitle = document.getElementById('featured-title')
+  const elCat = document.getElementById('featured-category')
+  const elDate = document.getElementById('featured-date')
+  const elDur = document.getElementById('featured-duration')
+  const elLink = document.getElementById('featured-link')
+
+  if (!elThumb || !elLink) return
+
+  function loadThumb (videoId) {
+    if (!videoId) {
+      // FIX: pakai class thumb-hidden, bukan inline style
+      elThumb.classList.add('thumb-hidden')
+      if (elPlaceholder) elPlaceholder.style.display = 'flex'
+      return
+    }
+    const maxUrl = 'https://i.ytimg.com/vi/' + videoId + '/maxresdefault.jpg'
+    const mqUrl = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg'
+    const probe = new Image()
+    probe.onload = () => {
+      elThumb.src = maxUrl
+      elThumb.classList.remove('thumb-hidden')
+      if (elPlaceholder) elPlaceholder.style.display = 'none'
+    }
+    probe.onerror = () => {
+      elThumb.src = mqUrl
+      elThumb.classList.remove('thumb-hidden')
+      if (elPlaceholder) elPlaceholder.style.display = 'none'
+    }
+    probe.src = maxUrl
+  }
+
+  function updateFeatured (item) {
+    const videoId = item.dataset.videoId || ''
+    const title = item.dataset.title || ''
+    const category = item.dataset.category || ''
+    const date = item.dataset.date || ''
+    const duration = item.dataset.duration || '–:––'
+    const videoUrl = videoId
+      ? 'https://www.youtube.com/watch?v=' + videoId
+      : CHANNEL_URL
+
+    loadThumb(videoId)
+    elTitle.textContent = title || 'Pilih video dari daftar.'
+    elCat.textContent = category || 'Kajian'
+    elDate.textContent = date || ''
+    elDur.textContent = duration
+    elLink.href = videoUrl
+  }
+
+  function setActiveItem (activeItem) {
+    document.querySelectorAll('.video-item').forEach(el => {
+      el.classList.remove('active-video')
+    })
+    activeItem.classList.add('active-video')
+  }
+
+  // FIX: preventDefault agar klik sidebar update featured dulu,
+  // user bisa Ctrl+Click atau buka tab manual dari link sendiri
+  document.querySelectorAll('.video-item').forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault()
+      setActiveItem(item)
+      updateFeatured(item)
+      // Buka YouTube setelah 300ms delay (UX: lihat preview dulu)
+      setTimeout(() => {
+        window.open(item.href, '_blank', 'noopener,noreferrer')
+      }, 300)
+    })
+  })
+
+  // Auto-load item pertama
+  const firstItem = document.querySelector('.video-item')
+  if (firstItem) {
+    setActiveItem(firstItem)
+    updateFeatured(firstItem)
+  }
+}
+
 // ── Init semua setelah DOM ready ──
 window.addEventListener('DOMContentLoaded', () => {
   initTyping()
-  createCarousel(
-    'carousel-track',
-    'carousel-dots',
-    'carousel-prev',
-    'carousel-next',
-    'carousel-card'
-  )
-  createCarousel(
-    'carousel-track-2',
-    'carousel-dots-2',
-    'carousel-prev-2',
-    'carousel-next-2',
-    'carousel-card-2'
-  )
+
+  // FIX: Hanya panggil carousel yang ID-nya ada di HTML
+  createCarousel('carousel-track', 'carousel-dots', 'carousel-card')
+  // carousel-track-2 dihapus karena tidak ada di HTML
+
+  initYoutube()
 })
