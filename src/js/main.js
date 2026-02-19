@@ -307,55 +307,105 @@ function createCarousel (trackId, dotsId, cardClass) {
 function initYoutube () {
   const CHANNEL_URL = 'https://www.youtube.com/@Masjid_Ash-shomad_official/'
 
-  const elThumb = document.getElementById('featured-thumb')
-  const elPlaceholder = document.getElementById('featured-placeholder')
   const elTitle = document.getElementById('featured-title')
   const elCat = document.getElementById('featured-category')
   const elDate = document.getElementById('featured-date')
   const elDur = document.getElementById('featured-duration')
   const elLink = document.getElementById('featured-link')
 
-  if (!elThumb || !elLink) return
+  if (!elLink) return
 
-  function loadThumb (videoId) {
+  // Isi konten inner dari #featured-link berdasarkan videoId
+  // Coba thumbnail hqdefault — jika gagal fallback ke iframe embed
+  function loadFeatured (videoId) {
+    const container = elLink
     if (!videoId) {
-      // FIX: pakai class thumb-hidden, bukan inline style
-      elThumb.classList.add('thumb-hidden')
-      if (elPlaceholder) elPlaceholder.style.display = 'flex'
+      container.innerHTML = `
+        <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#064e3b]/60">
+          <svg class="w-14 h-14 text-[#fbbf24]/25" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          <span class="text-xs font-medium" style="color:rgba(255,255,255,0.4)">Pilih video dari daftar</span>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+        <span id="featured-duration" class="absolute top-3 right-3 z-10 text-xs font-mono text-white bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-lg">–:––</span>
+        <div class="absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-2">
+            <span id="featured-category" class="inline-flex items-center text-[11px] font-bold text-[#022c22] bg-[#fbbf24] px-3 py-0.5 rounded-full">Kajian</span>
+            <span id="featured-date" class="text-[11px] text-white/50 font-mono"></span>
+          </div>
+          <h3 id="featured-title" class="text-sm sm:text-base md:text-lg font-bold text-white leading-snug line-clamp-2">Pilih video dari daftar di bawah.</h3>
+        </div>`
       return
     }
-    const maxUrl = 'https://i.ytimg.com/vi/' + videoId + '/maxresdefault.jpg'
-    const mqUrl = 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg'
+
+    // Coba thumbnail dulu
+    const thumbUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
     const probe = new Image()
+
     probe.onload = () => {
-      elThumb.src = maxUrl
-      elThumb.classList.remove('thumb-hidden')
-      if (elPlaceholder) elPlaceholder.style.display = 'none'
+      // Thumbnail OK — tampilkan dengan overlay
+      container.innerHTML = `
+        <img src="${thumbUrl}" alt="Thumbnail Video"
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+        <span id="featured-duration" class="absolute top-3 right-3 z-10 text-xs font-mono text-white bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-lg"></span>
+        <div class="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="w-16 h-16 rounded-full bg-[#fbbf24] flex items-center justify-center shadow-2xl scale-90 group-hover:scale-100 transition-transform duration-300">
+            <svg class="w-7 h-7 text-[#022c22] ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <span id="featured-category" class="inline-flex items-center text-[11px] font-bold text-[#022c22] bg-[#fbbf24] px-3 py-0.5 rounded-full">Kajian</span>
+            <span id="featured-date" class="text-[11px] text-white/50 font-mono"></span>
+          </div>
+          <h3 id="featured-title" class="text-sm sm:text-base md:text-lg font-bold text-white leading-snug line-clamp-2"></h3>
+        </div>`
+      // Re-assign element references setelah innerHTML diganti
+      refreshOverlayRefs(videoId)
     }
+
     probe.onerror = () => {
-      elThumb.src = mqUrl
-      elThumb.classList.remove('thumb-hidden')
-      if (elPlaceholder) elPlaceholder.style.display = 'none'
+      // Thumbnail gagal — langsung tampilkan iframe embed
+      container.innerHTML = `
+        <iframe
+          src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&color=white"
+          class="absolute inset-0 w-full h-full"
+          style="border:0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          title="Video YouTube"></iframe>`
+      // Saat iframe, sembunyikan elemen overlay (sudah tidak ada di DOM)
     }
-    probe.src = maxUrl
+
+    probe.src = thumbUrl
+  }
+
+  function refreshOverlayRefs (videoId) {
+    // Update teks di elemen yang baru di-render ke DOM
+    const dur = document.getElementById('featured-duration')
+    const cat = document.getElementById('featured-category')
+    const dt = document.getElementById('featured-date')
+    const ttl = document.getElementById('featured-title')
+    // Data akan diisi oleh updateFeatured setelah ini dipanggil
+    // Simpan data sementara di dataset container
+    const item = document.querySelector('.video-item.active-video')
+    if (!item) return
+    if (dur) dur.textContent = item.dataset.duration || '–:––'
+    if (cat) cat.textContent = item.dataset.category || 'Kajian'
+    if (dt) dt.textContent = item.dataset.date || ''
+    if (ttl) ttl.textContent = item.dataset.title || ''
   }
 
   function updateFeatured (item) {
     const videoId = item.dataset.videoId || ''
-    const title = item.dataset.title || ''
-    const category = item.dataset.category || ''
-    const date = item.dataset.date || ''
-    const duration = item.dataset.duration || '–:––'
     const videoUrl = videoId
       ? 'https://www.youtube.com/watch?v=' + videoId
       : CHANNEL_URL
-
-    loadThumb(videoId)
-    elTitle.textContent = title || 'Pilih video dari daftar.'
-    elCat.textContent = category || 'Kajian'
-    elDate.textContent = date || ''
-    elDur.textContent = duration
-    elLink.href = videoUrl
+    if (elLink) elLink.href = videoUrl
+    loadFeatured(videoId)
+    // Teks akan di-refresh oleh refreshOverlayRefs setelah thumbnail load
   }
 
   function setActiveItem (activeItem) {
@@ -365,8 +415,7 @@ function initYoutube () {
     activeItem.classList.add('active-video')
   }
 
-  // FIX: preventDefault agar klik sidebar update featured dulu,
-  // user bisa Ctrl+Click atau buka tab manual dari link sendiri
+  // Klik sidebar: update featured panel, buka YouTube setelah delay
   document.querySelectorAll('.video-item').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault()
