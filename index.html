@@ -16,68 +16,121 @@
   <style>
     /* ── CSS Custom Properties ── */
     :root {
-      --color-bg:   #011a14;
-      --color-fg:   rgba(255,255,255,0.92);
-      --color-fg-60: rgba(255,255,255,0.60);
-      --color-fg-50: rgba(255,255,255,0.50);
-      --color-fg-40: rgba(255,255,255,0.40);
-      --color-fg-30: rgba(255,255,255,0.30);
-      --color-gold:  #fbbf24;
+      --color-bg: #011a14;
+      --color-fg: rgba(255, 255, 255, 0.92);
+      --color-fg-60: rgba(255, 255, 255, 0.60);
+      --color-fg-50: rgba(255, 255, 255, 0.50);
+      --color-fg-40: rgba(255, 255, 255, 0.40);
+      --color-fg-30: rgba(255, 255, 255, 0.30);
+      --color-gold: #fbbf24;
     }
 
-    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    * {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
 
     body {
       background-color: var(--color-bg);
       color: var(--color-fg);
       min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
 
-    .text-fg    { color: var(--color-fg); }
-    .text-fg-60 { color: var(--color-fg-60); }
-    .text-fg-50 { color: var(--color-fg-50); }
-    .text-fg-40 { color: var(--color-fg-40); }
-    .text-fg-30 { color: var(--color-fg-30); }
+    .text-fg {
+      color: var(--color-fg);
+    }
+
+    .text-fg-60 {
+      color: var(--color-fg-60);
+    }
+
+    .text-fg-50 {
+      color: var(--color-fg-50);
+    }
+
+    .text-fg-40 {
+      color: var(--color-fg-40);
+    }
+
+    .text-fg-30 {
+      color: var(--color-fg-30);
+    }
 
     .glass-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
+
     .glass-card-strong {
-      background: rgba(2,44,34,0.85);
-      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(2, 44, 34, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.10);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
     }
 
-    .glow-gold { box-shadow: 0 0 20px rgba(251,191,36,0.25); }
+    .glow-gold {
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.25);
+    }
 
     /* ── FIX error baris 192: hero background image ── */
     .hero-bg-img {
+      position: absolute;
+      inset: 0;
       background-image: url('./src/img/masjid.jpeg');
-      background-size: cover;
       background-repeat: no-repeat;
-      background-position: center 79%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-full {
+      width: 100vw;
+      max-width: 100vw;
+    }
+
+    /* tablet */
+    @media (min-width: 768px) {
+      .hero-bg-img {
+        min-height: 85vh;
+      }
+    }
+
+    /* desktop besar → cinematic */
+    @media (min-width: 1280px) {
+      .hero-bg-img {
+        min-height: 100vh;
+        background-position: center center;
+      }
+    }
+
+    /* layar ultra wide */
+    @media (min-width: 1600px) {
+      .hero-bg-img {
+        min-height: 110vh;
+      }
     }
 
     /* ── FIX error baris 194: hero overlay gradient ── */
     .hero-overlay-gradient {
-      background: linear-gradient(
-        to bottom,
-        rgba(2,44,34,0.60) 0%,
-        rgba(2,44,34,0.05) 35%,
-        rgba(2,44,34,0.05) 65%,
-        rgba(2,44,34,0.75) 100%
-      );
+      background: linear-gradient(to bottom,
+          rgba(2, 44, 34, 0.60) 0%,
+          rgba(2, 44, 34, 0.05) 35%,
+          rgba(2, 44, 34, 0.05) 65%,
+          rgba(2, 44, 34, 0.75) 100%);
     }
 
     /* ── FIX error baris 610: padding-top 16:9 featured video ── */
-    .ratio-16-9 { padding-top: 56.25%; }
+    .ratio-16-9 {
+      padding-top: 56.25%;
+    }
 
     /* ── FIX: featured-thumb hidden state pakai class, bukan inline style ── */
-    .thumb-hidden { display: none; }
+    .thumb-hidden {
+      display: none;
+    }
 
     /* ── Floating dock ── */
     .dock-hidden {
@@ -86,6 +139,7 @@
       pointer-events: none;
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
+
     .dock-visible {
       opacity: 1;
       transform: translate(-50%, 0px);
@@ -95,28 +149,56 @@
 
     /* ── Animations ── */
     @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-20px); }
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
     }
+
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(32px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .animate-float { animation: float 6s ease-in-out infinite; }
-    .orb-delay     { animation-delay: -3s; }
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
 
-    .fade-in-up         { opacity: 0; }
-    .fade-in-up.visible { animation: fadeInUp 0.8s ease forwards; }
+    .orb-delay {
+      animation-delay: -3s;
+    }
+
+    .fade-in-up {
+      opacity: 0;
+    }
+
+    .fade-in-up.visible {
+      animation: fadeInUp 0.8s ease forwards;
+    }
 
     /* ── Nav active ── */
     .nav-item.active {
-      background: rgba(251,191,36,0.15);
+      background: rgba(251, 191, 36, 0.15);
       color: #fbbf24;
     }
 
     /* ── Map iframe ── */
-    .map-iframe { border: 0; display: block; }
+    .map-iframe {
+      border: 0;
+      display: block;
+    }
 
     /* ── Modal ── */
     .modal-overlay {
@@ -124,17 +206,25 @@
       pointer-events: none;
       transition: opacity 0.3s ease;
     }
-    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .modal-box {
       transform: scale(0.95) translateY(10px);
       transition: transform 0.3s ease;
     }
-    .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+
+    .modal-overlay.open .modal-box {
+      transform: scale(1) translateY(0);
+    }
 
     /* ── Video item active ── */
     .video-item.active-video {
-      border-color: rgba(251,191,36,0.40) !important;
-      background: rgba(251,191,36,0.05);
+      border-color: rgba(251, 191, 36, 0.40) !important;
+      background: rgba(251, 191, 36, 0.05);
     }
 
     /* ── FIX error baris 613 + Safari fix: user-select ── */
@@ -142,11 +232,15 @@
       display: flex;
       gap: 1rem;
       cursor: grab;
-      -webkit-user-select: none; /* Safari iOS */
+      -webkit-user-select: none;
+      /* Safari iOS */
       user-select: none;
       will-change: transform;
     }
-    #carousel-track:active { cursor: grabbing; }
+
+    #carousel-track:active {
+      cursor: grabbing;
+    }
   </style>
 </head>
 
@@ -155,7 +249,7 @@
   <!-- ════════════════════════════════════════════
        HERO SECTION
   ═════════════════════════════════════════════ -->
-  <section id="beranda" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <section id="beranda" class="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
 
     <!-- FIX baris 192: ganti inline style → class hero-bg-img -->
     <div class="absolute inset-0 hero-bg-img"></div>
@@ -192,51 +286,75 @@
     </div>
   </section>
 
-  <!-- ACTION BAR -->
-  <div id="action-bar" class="relative z-20 bg-[#022c22]/95 backdrop-blur-md border-t border-[#fbbf24]/10">
-    <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col lg:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3 w-full lg:w-auto">
-        <div class="flex items-center gap-2 shrink-0">
-          <svg class="w-4 h-4 text-[#fbbf24]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-          <span class="text-xs font-medium text-fg-50 whitespace-nowrap">Waktu Shalat</span>
+
+
+
+
+
+
+
+  <!-- ACTION BAR WRAPPER (NEW) -->
+  <div class="relative z-20">
+
+    <!-- gradient transition dari hero ke action bar -->
+    <div class="absolute -top-16 left-0 w-full h-16 
+              bg-gradient-to-b from-transparent to-[#022c22]/90 pointer-events-none">
+    </div>
+
+    <!-- ACTION BAR -->
+    <div id="action-bar" class="relative mx-6 -mt-12 
+    bg-[#022c22]/90 backdrop-blur-xl 
+    border border-white/10
+    rounded-2xl shadow-2xl">
+
+      <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col lg:flex-row items-center justify-between gap-4">
+
+        <div class="flex items-center gap-3 w-full lg:w-auto">
+          <div class="flex items-center gap-2 shrink-0">
+            <svg class="w-4 h-4 text-[#fbbf24]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span class="text-xs font-medium text-fg-50 whitespace-nowrap">Waktu Shalat</span>
+          </div>
+
+          <div class="grid grid-cols-5 gap-2 flex-1" id="prayer-grid"></div>
+
+          <span id="live-clock" class="text-sm text-[#fbbf24] font-mono shrink-0 hidden sm:block">
+            00:00:00
+          </span>
         </div>
-        <div class="grid grid-cols-5 gap-2 flex-1" id="prayer-grid"></div>
-        <span id="live-clock" class="text-sm text-[#fbbf24] font-mono shrink-0 hidden sm:block">00:00:00</span>
-      </div>
-      <div class="flex items-center gap-3 shrink-0 flex-wrap justify-center">
-        <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer"
-          class="group flex items-center gap-2 bg-[#fbbf24] text-[#022c22] font-semibold px-5 py-2.5 rounded-xl hover:scale-105 transition-all duration-300 glow-gold text-sm whitespace-nowrap">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-          </svg>
-          Layanan Umat
-        </a>
-        <button id="open-modal"
-          class="group flex items-center gap-2 glass-card text-fg-50 hover:text-[#fbbf24] font-semibold px-5 py-2.5 rounded-xl hover:scale-105 hover:bg-[#fbbf24]/10 transition-all duration-300 text-sm whitespace-nowrap border border-[#fbbf24]/20">
-          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path
-              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-          </svg>
-          Infaq Digital
-        </button>
-        <a href="#kegiatan"
-          class="group flex items-center gap-2 glass-card text-fg font-semibold px-5 py-2.5 rounded-xl hover:scale-105 hover:bg-white/10 transition-all duration-300 text-sm whitespace-nowrap">
-          Jelajahi Kegiatan
-          <svg class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </a>
+
+        <div class="flex items-center gap-3 shrink-0 flex-wrap justify-center">
+
+          <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer"
+            class="group flex items-center gap-2 bg-[#fbbf24] text-[#022c22] font-semibold px-5 py-2.5 rounded-xl hover:scale-105 transition-all duration-300 glow-gold text-sm whitespace-nowrap">
+            <!-- icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c..." />
+            </svg>
+            Layanan Umat
+          </a>
+
+
+
+          <a href="#kegiatan"
+            class="group flex items-center gap-2 glass-card text-fg font-semibold px-5 py-2.5 rounded-xl hover:scale-105 hover:bg-white/10 transition-all duration-300 text-sm whitespace-nowrap">
+            Jelajahi Kegiatan
+            <svg class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </a>
+
+        </div>
       </div>
     </div>
   </div>
+
+
+
 
   <!-- ════════════════════════════════════════════
        ACTIVITIES SECTION
@@ -434,8 +552,7 @@
 
       <div class="relative overflow-hidden rounded-2xl">
         <div id="carousel-track">
-          <div
-            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
               <img src="./src/img/makangratis.jpg" alt="Kajian Rutin" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -459,8 +576,7 @@
               </p>
             </div>
           </div>
-          <div
-            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
               <img src="./src/img/kegiatan-2.jpeg" alt="TPA Al-Quran" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -484,8 +600,7 @@
                 sore.</p>
             </div>
           </div>
-          <div
-            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
               <img src="./src/img/kegiatan-3.jpeg" alt="Kegiatan Sosial" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -509,8 +624,7 @@
               </p>
             </div>
           </div>
-          <div
-            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
               <img src="./src/img/kegiatan-4.jpeg" alt="Ramadhan" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -532,8 +646,7 @@
               <p class="text-sm text-fg-50 leading-relaxed">Buka puasa bersama, tarawih, dan itikaf di bulan suci.</p>
             </div>
           </div>
-          <div
-            class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
+          <div class="carousel-card shrink-0 w-[85vw] sm:w-[420px] md:w-[480px] rounded-2xl overflow-hidden glass-card">
             <div class="relative h-64 bg-[#064e3b]/40 flex items-center justify-center overflow-hidden">
               <img src="./src/img/kegiatan-5.jpeg" alt="Majelis Taklim" class="w-full h-full object-cover"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
@@ -587,8 +700,7 @@
 
           <!-- FIX baris 610: ganti style="padding-top:56.25%" → class ratio-16-9 -->
           <a id="featured-link" href="https://www.youtube.com/@Masjid_Ash-shomad_official/" target="_blank"
-            rel="noopener noreferrer"
-            class="block relative w-full bg-[#064e3b]/60 overflow-hidden ratio-16-9">
+            rel="noopener noreferrer" class="block relative w-full bg-[#064e3b]/60 overflow-hidden ratio-16-9">
 
             <!-- FIX baris 613: ganti style="display:none" → class thumb-hidden (dikontrol JS) -->
             <img id="featured-thumb" src="" alt="Thumbnail Video"
@@ -727,8 +839,7 @@
           <!-- Item 4 -->
           <a href="https://www.youtube.com/watch?v=rYkk1FN7oek" target="_blank" rel="noopener noreferrer"
             class="video-item group glass-card rounded-xl p-3 flex gap-3 border border-transparent hover:border-[#fbbf24]/20 hover:scale-[1.02] transition-all duration-300"
-            data-video-id="rYkk1FN7oek"
-            data-title="Meneladani Perjuangan Nabiyullah Ibrahim dan Ismail dalam kehidupan"
+            data-video-id="rYkk1FN7oek" data-title="Meneladani Perjuangan Nabiyullah Ibrahim dan Ismail dalam kehidupan"
             data-category="Idul Adha" data-date="Khatib Idul Qurban." data-duration="22:35">
             <div class="relative shrink-0 w-28 h-16 rounded-lg overflow-hidden bg-[#064e3b]/40">
               <img src="https://i.ytimg.com/vi/rYkk1FN7oek/mqdefault.jpg" alt="" class="w-full h-full object-cover"
@@ -826,8 +937,7 @@
             <a href="https://maps.google.com/?q=Masjid+Ash-Shomad+Citra+Raya+Tangerang" target="_blank"
               rel="noopener noreferrer"
               class="glass-card rounded-xl p-5 flex items-center gap-4 hover:scale-[1.02] transition-all duration-300 group">
-              <div
-                class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors">
+              <div class="p-3 rounded-xl bg-[#064e3b]/40 text-[#fbbf24] group-hover:bg-[#fbbf24]/20 transition-colors">
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   aria-hidden="true">
@@ -908,14 +1018,13 @@
   <!-- ════════════════════════════════════════════
        FLOATING DOCK
   ═════════════════════════════════════════════ -->
-  <nav id="floating-dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 dock-hidden"
-    aria-label="Navigasi utama">
+  <nav id="floating-dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 dock-hidden" aria-label="Navigasi utama">
     <div class="glass-card-strong rounded-2xl px-2 py-2 flex items-center gap-1">
       <a href="#beranda" data-section="beranda"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Beranda">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
           <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
@@ -924,8 +1033,8 @@
       <a href="#kegiatan" data-section="kegiatan"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Kegiatan">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
           <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
         </svg>
@@ -934,8 +1043,8 @@
       <a href="#donasi" data-section="donasi"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Galeri">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="3" y="3" width="18" height="18" rx="2" />
           <circle cx="8.5" cy="8.5" r="1.5" />
           <polyline points="21 15 16 10 5 21" />
@@ -945,8 +1054,8 @@
       <a href="#tontonan" data-section="tontonan"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Tontonan">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path
             d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
           <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
@@ -956,8 +1065,8 @@
       <a href="#tentang" data-section="tentang"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Tentang">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
           <circle cx="12" cy="10" r="3" />
         </svg>
@@ -966,8 +1075,8 @@
       <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer"
         class="nav-item group relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-300 text-fg-50 hover:text-fg hover:bg-white/[0.08]"
         aria-label="Kontak via WhatsApp">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
         <span class="nav-label text-xs font-medium hidden sm:inline">Kontak</span>
@@ -978,14 +1087,14 @@
   <!-- ════════════════════════════════════════════
        DONATION MODAL
   ═════════════════════════════════════════════ -->
-  <div id="donation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay"
-    role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="donation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay" role="dialog"
+    aria-modal="true" aria-labelledby="modal-title">
     <div class="absolute inset-0 bg-[#022c22]/80 backdrop-blur-sm" id="modal-backdrop"></div>
     <div class="modal-box relative glass-card-strong rounded-3xl p-8 max-w-md w-full">
       <button id="close-modal" aria-label="Tutup modal donasi"
         class="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-fg-50">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
