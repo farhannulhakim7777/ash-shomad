@@ -302,81 +302,78 @@
     </div>
 
     <!-- ACTION BAR -->
-    <div id="action-bar" class="relative mx-4 sm:mx-6 -mt-12
+    <div id="action-bar" class="relative mx-3 sm:mx-6 -mt-12
     bg-[#022c22]/90 backdrop-blur-xl
     border border-white/10
     rounded-2xl shadow-2xl">
 
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-5">
+      <div class="max-w-6xl mx-auto px-3 sm:px-6 py-4">
 
-        <!-- ALWAYS ROW (mobile + desktop) -->
-        <div class="flex items-center justify-between gap-4 flex-wrap lg:flex-nowrap">
+        <!-- ROW 1: Waktu Shalat -->
+        <div class="flex items-center gap-2 mb-3">
 
-          <!-- LEFT SIDE -->
-          <div class="flex items-center gap-3 flex-1 min-w-0">
-
-            <!-- label -->
-            <div class="flex items-center gap-2 shrink-0">
-              <svg class="w-4 h-4 text-[#fbbf24]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
-              <span class="text-xs font-medium text-fg-50 whitespace-nowrap">
-                Waktu Shalat
-              </span>
-            </div>
-
-            <!-- SCROLL WRAPPER (mobile fix) -->
-            <div class="flex-1 overflow-x-auto">
-              <div id="prayer-grid" class="grid grid-cols-5 gap-2 min-w-[320px]">
-              </div>
-            </div>
-
-            <!-- clock -->
-            <span id="live-clock" class="text-sm text-[#fbbf24] font-mono shrink-0 hidden sm:block">
-              00:00:00
-            </span>
-
+          <!-- label + clock kiri kanan -->
+          <div class="flex items-center gap-1.5 shrink-0">
+            <svg class="w-3.5 h-3.5 text-[#fbbf24]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span class="text-[11px] font-medium text-white/60 whitespace-nowrap">Waktu Shalat</span>
           </div>
 
-          <!-- RIGHT SIDE BUTTONS -->
-          <div class="flex items-center gap-3 shrink-0">
+          <!-- Divider -->
+          <div class="w-px h-4 bg-white/20 shrink-0"></div>
 
-            <!-- layanan umat -->
-            <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2
-            bg-[#fbbf24] text-[#022c22] font-semibold
-            px-5 py-2.5 rounded-xl
-            whitespace-nowrap
-            hover:scale-105 transition-all duration-300
-            glow-gold text-sm">
-
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c..." />
-              </svg>
-
-              Layanan Umat
-            </a>
-
-            <!-- kegiatan -->
-            <a href="#kegiatan" class="group flex items-center gap-2
-            glass-card text-fg font-semibold
-            px-5 py-2.5 rounded-xl
-            whitespace-nowrap
-            hover:bg-white/10 hover:scale-105
-            transition-all duration-300 text-sm">
-
-              Jelajahi Kegiatan
-
-              <svg class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </a>
-
+          <!-- Prayer grid — scrollable pada layar sangat kecil -->
+          <div class="flex-1 overflow-x-auto scrollbar-none">
+            <div id="prayer-grid" class="grid grid-cols-5 gap-1.5 min-w-[260px]">
+              <!-- Diisi JS -->
+            </div>
           </div>
+
+          <!-- Live clock -->
+          <span id="live-clock" class="text-xs text-[#fbbf24] font-mono shrink-0 ml-1">
+            00:00:00
+          </span>
 
         </div>
+
+        <!-- Divider -->
+        <div class="h-px bg-white/10 mb-3"></div>
+
+        <!-- ROW 2: Buttons -->
+        <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+
+          <!-- Layanan Umat -->
+          <a href="https://wa.me/6281218612022" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none flex items-center justify-center gap-2
+          bg-[#fbbf24] text-[#022c22] font-semibold
+          px-4 py-2.5 rounded-xl text-sm
+          whitespace-nowrap hover:scale-105 transition-all duration-300 shadow-lg">
+
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              <path
+                d="M11.998 2C6.477 2 2 6.477 2 12c0 1.99.576 3.842 1.57 5.404L2.046 22l4.765-1.489A9.955 9.955 0 0011.998 22c5.523 0 10-4.477 10-10S17.521 2 11.998 2zm0 18c-1.74 0-3.36-.472-4.757-1.293l-.34-.202-3.527 1.102.946-3.404-.222-.35A7.96 7.96 0 014 12c0-4.411 3.589-8 7.998-8C16.41 4 20 7.589 20 12s-3.59 8-8.002 8z" />
+            </svg>
+            Layanan Umat
+          </a>
+
+          <!-- Jelajahi Kegiatan -->
+          <a href="#kegiatan" class="flex-1 sm:flex-none flex items-center justify-center gap-2
+          border border-white/20 text-white font-semibold
+          px-4 py-2.5 rounded-xl text-sm
+          whitespace-nowrap hover:bg-white/10 hover:scale-105
+          transition-all duration-300">
+            Jelajahi Kegiatan
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </a>
+
+        </div>
+
       </div>
     </div>
 
