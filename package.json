@@ -1,0 +1,25 @@
+{
+  "name": "masjid-ash-shomad",
+  "version": "2.0.0",
+  "description": "Website Masjid Ash-Shomad - Modern mosque website with prayer times, activities, and donation features",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "clean": "rimraf dist"
+  },
+  "keywords": [
+    "masjid",
+    "mosque",
+    "islamic",
+    "prayer-times",
+    "indonesia"
+  ],
+  "author": "Masjid Ash-Shomad",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0",
+    "rimraf": "^5.0.0"
+  }
+}

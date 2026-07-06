@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════
+   BASE LAYER
+══════════════════════════════════════════ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+
+  /* Focus Styles for Accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-emerald-500 ring-offset-2;
+  }
+
+  /* Skip Link - handled by Tailwind's built-in sr-only utility */
+}
+
+/* ══════════════════════════════════════════
+   COMPONENTS LAYER
+══════════════════════════════════════════ */
+@layer components {
+  /* Navigation Links */
+  .nav-link {
+    @apply px-4 py-2 rounded-lg text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-medium transition-all duration-200;
+  }
+
+  .nav-link.active {
+    @apply text-emerald-600 bg-emerald-50;
+  }
+
+  .mobile-nav-link {
+    @apply px-4 py-3 rounded-lg text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 font-medium transition-all duration-200;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 px-6 py-3 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all duration-200;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:border-emerald-200 hover:-translate-y-1;
+  }
+
+  /* Section Headers */
+  .section-badge {
+    @apply inline-block bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4;
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-gray-600 max-w-2xl mx-auto;
+  }
+
+  /* Prayer Time Cards */
+  .prayer-card {
+    @apply bg-white rounded-xl p-4 border border-gray-200 text-center transition-all duration-200;
+  }
+
+  .prayer-card.active {
+    @apply bg-emerald-50 border-emerald-300 shadow-md;
+  }
+
+  .prayer-card.active .prayer-name {
+    @apply text-emerald-700;
+  }
+
+  .prayer-card.active .prayer-time {
+    @apply text-emerald-600 font-bold;
+  }
+
+  /* Floating Dock Navigation */
+  .nav-item.active {
+    @apply text-emerald-600 bg-emerald-50;
+  }
+}
+
+/* ══════════════════════════════════════════
+   UTILITIES LAYER
+══════════════════════════════════════════ */
+@layer utilities {
+  /* Text Gradients */
+  .text-gradient-emerald {
+    @apply bg-gradient-to-r from-emerald-600 to-emerald-800 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent;
+  }
+
+  /* Background Gradients */
+  .bg-gradient-islamic {
+    @apply bg-gradient-to-br from-emerald-50 via-white to-amber-50;
+  }
+
+  /* Glass Effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-gray-200;
+  }
+
+  .glass-dark {
+    @apply bg-gray-900/80 backdrop-blur-md border border-gray-700;
+  }
+
+  /* Animation Utilities */
+  .animate-on-scroll {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+
+  .animate-on-scroll.visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
