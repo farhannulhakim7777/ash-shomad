@@ -20,13 +20,13 @@ export class PrayerTimes {
   }
 
   getMoonIcon() {
-    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    return `<svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
     </svg>`;
   }
 
   getSunIcon() {
-    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    return `<svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="12" cy="12" r="5"/>
       <line x1="12" y1="1" x2="12" y2="3"/>
       <line x1="12" y1="21" x2="12" y2="23"/>
@@ -40,7 +40,7 @@ export class PrayerTimes {
   }
 
   getCloudIcon() {
-    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    return `<svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
     </svg>`;
   }
@@ -125,9 +125,9 @@ export class PrayerTimes {
       
       return `
         <div class="prayer-card ${activeClass}">
-          <div class="mb-2">${prayer.icon}</div>
-          <p class="prayer-name text-sm font-medium text-gray-600 mb-1">${prayer.name}</p>
-          <p class="prayer-time text-lg font-bold text-gray-900">${prayer.time}</p>
+          <div class="mb-1 sm:mb-2">${prayer.icon}</div>
+          <p class="prayer-name text-xs sm:text-sm font-medium text-gray-600 mb-0.5 sm:mb-1">${prayer.name}</p>
+          <p class="prayer-time text-sm sm:text-lg font-bold text-gray-900">${prayer.time}</p>
         </div>
       `;
     }).join('');
@@ -146,9 +146,9 @@ export class PrayerTimes {
       const bgClass = isActive ? 'bg-white/30 text-amber-400' : 'bg-white/10 text-white';
       
       return `
-        <div class="text-center p-2 rounded-lg ${bgClass}">
-          <p class="text-xs font-medium mb-1">${prayer.name}</p>
-          <p class="text-sm font-bold">${prayer.time}</p>
+        <div class="text-center p-1.5 sm:p-2 rounded-lg ${bgClass}">
+          <p class="text-[10px] sm:text-xs font-medium mb-0.5 sm:mb-1">${prayer.name}</p>
+          <p class="text-xs sm:text-sm font-bold">${prayer.time}</p>
         </div>
       `;
     }).join('');

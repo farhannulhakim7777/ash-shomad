@@ -145,4 +145,14 @@
   .animate-on-scroll.visible {
     @apply opacity-100 translate-y-0;
   }
+
+  /* Hide Scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
